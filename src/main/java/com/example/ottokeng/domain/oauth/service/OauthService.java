@@ -2,6 +2,7 @@ package com.example.ottokeng.domain.oauth.service;
 
 import com.example.ottokeng.domain.oauth.config.OauthProvider;
 import com.example.ottokeng.domain.oauth.dto.LoginResponse;
+import com.example.ottokeng.domain.oauth.dto.OauthTokenResponse;
 import com.example.ottokeng.domain.oauth.dto.UserProfile;
 import com.example.ottokeng.domain.oauth.repository.InMemoryProviderRepository;
 import com.example.ottokeng.domain.user.entity.User;
