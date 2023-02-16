@@ -1,5 +1,6 @@
 package com.example.ottokeng.global.security.authentication;
 
+import com.example.ottokeng.domain.user.repository.UserRepository;
 import com.example.ottokeng.global.exception.CustomException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
