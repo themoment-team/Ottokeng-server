@@ -7,6 +7,7 @@ import com.example.ottokeng.domain.oauth.dto.OauthTokenResponse;
 import com.example.ottokeng.domain.oauth.dto.RefreshToken;
 import com.example.ottokeng.domain.oauth.dto.UserProfile;
 import com.example.ottokeng.domain.oauth.repository.InMemoryProviderRepository;
+import com.example.ottokeng.domain.oauth.repository.RefreshTokenRepository;
 import com.example.ottokeng.domain.user.entity.User;
 import com.example.ottokeng.domain.user.repository.UserRepository;
 import com.example.ottokeng.global.security.jwt.JwtTokenProvider;
