@@ -1,6 +1,7 @@
 package com.example.ottokeng.domain.oauth.controller;
 
 import com.example.ottokeng.domain.oauth.dto.LoginResponse;
+import com.example.ottokeng.domain.oauth.service.OauthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
