@@ -1,5 +1,6 @@
 package com.example.ottokeng.domain.oauth.config;
 
+import com.example.ottokeng.domain.oauth.repository.InMemoryProviderRepository;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
