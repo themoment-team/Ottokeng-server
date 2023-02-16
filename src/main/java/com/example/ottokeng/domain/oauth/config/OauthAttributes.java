@@ -1,5 +1,7 @@
 package com.example.ottokeng.domain.oauth.config;
 
+import com.example.ottokeng.domain.oauth.dto.UserProfile;
+
 import java.util.Arrays;
 import java.util.Map;
 
