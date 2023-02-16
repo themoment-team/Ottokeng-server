@@ -1,6 +1,7 @@
 package com.example.ottokeng.global.security.jwt;
 
 import com.example.ottokeng.global.exception.ErrorCode;
+import com.example.ottokeng.global.exception.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
