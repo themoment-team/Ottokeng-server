@@ -13,14 +13,12 @@ import com.example.ottokeng.domain.user.repository.UserRepository;
 import com.example.ottokeng.global.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Collections;
 import java.util.Map;
 
 @Service
@@ -67,19 +65,23 @@ public class OauthService {
     }
 
     private OauthTokenResponse getToken(String code, OauthProvider provider) {
+
+        MultiValueMap<String , String> params = new LinkedMultiValueMap<>();
+        params.add("grant_type", "authorization_code");
+        params.add("client_id", provider.getClientId() );
+        params.add("redirect_uri", provider.getRedirectUrl());
+        params.add("code", code);
+        params.add("client_secret", provider.getClientSecret());
+
         return WebClient.create()
                 .post()
                 .uri(provider.getTokenUrl())
-                .headers(header -> {
-                    header.setBasicAuth(provider.getClientId(), provider.getClientSecret());
-                    header.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-                    header.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-                    header.setAcceptCharset(Collections.singletonList(StandardCharsets.UTF_8));
-                })
-                .bodyValue(tokenRequest(code, provider))
+                .body(BodyInserters.fromFormData(params))
+                .header("Content-type","application/x-www-form-urlencoded;charset=utf-8" ) //요청 헤더
                 .retrieve()
                 .bodyToMono(OauthTokenResponse.class)
                 .block();
+
     }
 
     private MultiValueMap<String, String> tokenRequest(String code, OauthProvider provider) {
