@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Find {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "find")

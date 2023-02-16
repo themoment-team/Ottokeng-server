@@ -1,6 +1,6 @@
 package com.example.ottokeng.domain.find.entity;
 
-public enum Get {
+public enum Acquisition {
     ACQUISITION,
     NON_ACQUISITION
 }

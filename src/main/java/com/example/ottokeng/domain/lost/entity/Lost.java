@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Lost {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "lost")
