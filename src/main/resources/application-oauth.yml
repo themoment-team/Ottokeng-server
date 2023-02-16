@@ -1,0 +1,21 @@
+oauth2:
+  user:
+    google:
+      client-id: 538481420034-4isr045pef9cef76904bhukj5gjg8qs9.apps.googleusercontent.com
+      client-secret: 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
+      redirect-uri: http://localhost:8080/login/oauth2/code/google
+    kakao:
+      client-id: 250c6af4efaac52ed213b342d00b5175
+      client-secret: F8G7qfHyG1Ml10mqCZRugeqf8dsSJGDg
+      redirect-uri: http://localhost:8080/login/oauth2/code/kakao
+  provider:
+    google:
+      token-uri: https://www.googleapis.com/oauth2/v4/token
+      user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+    kakao:
+      token-uri: https://kauth.kakao.com/oauth/token
+      user-info-uri: https://kapi.kakao.com/v2/user/me
+
+jwt:
+  token:
+    secretKey: yOeHjKegnwjbli5csZbO1jE9r+qoGkpWgX2JdHjw3tI=
