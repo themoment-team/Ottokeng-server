@@ -1,10 +1,10 @@
 package com.example.ottokeng.global.util;
 
+import com.example.ottokeng.domain.user.entity.User;
 import com.example.ottokeng.domain.user.repository.UserRepository;
 import com.example.ottokeng.global.exception.CustomException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
