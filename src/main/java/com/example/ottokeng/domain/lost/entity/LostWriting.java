@@ -1,7 +1,5 @@
 package com.example.ottokeng.domain.lost.entity;
 
-import com.example.ottokeng.domain.find.entity.Find;
-import com.example.ottokeng.domain.find.entity.Get;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -19,7 +19,7 @@ public class FindWriting {
     private String detail;
 
     @Enumerated(EnumType.STRING)
-    private Get get;
+    private Acquisition acquisition;
 
     private String image;
 
