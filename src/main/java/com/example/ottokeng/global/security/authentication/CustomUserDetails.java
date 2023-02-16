@@ -1,5 +1,6 @@
 package com.example.ottokeng.global.security.authentication;
 
+import com.example.ottokeng.domain.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

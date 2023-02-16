@@ -1,5 +1,6 @@
 package com.example.ottokeng.domain.user.entity;
 
+import com.example.ottokeng.global.enumType.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
