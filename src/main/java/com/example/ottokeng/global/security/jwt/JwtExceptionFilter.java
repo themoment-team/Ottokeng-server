@@ -1,5 +1,6 @@
 package com.example.ottokeng.global.security.jwt;
 
+import com.example.ottokeng.global.exception.ErrorCode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
@@ -12,6 +13,8 @@ import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
+import static com.example.ottokeng.global.exception.ErrorCode.*;
 
 
 @Slf4j
