@@ -36,3 +36,6 @@ application.yml
 
 ### VS Code ###
 .vscode/
+
+### For Secret ###
+application-oauth.yml
