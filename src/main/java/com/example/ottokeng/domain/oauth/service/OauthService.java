@@ -41,7 +41,7 @@ public class OauthService {
         User user = saveOrUpdate(userProfile);
 
         String accessToken = jwtTokenProvider.createAccessToken(user.getOauthId());
-        String refreshToken = jwtTokenProvider.createRefreshToken();
+        String refreshToken = jwtTokenProvider.createRefreshToken(user.getOauthId());
 
         RefreshToken entityToRedis = new RefreshToken(user.getOauthId(), refreshToken, jwtTokenProvider.getREFRESHTOKEN_VALIDATION_EXPIREDTIME());
         refreshTokenRepository.save(entityToRedis);
