@@ -30,7 +30,7 @@ public class JwtTokenFilter extends OncePerRequestFilter { // OncePerRequestFilt
 
         if (token != null && jwtTokenProvider.validateToken(token)) {
             if(redisTemplate.opsForValue().get(token)!=null) {
-                throw new CustomException(INVALID_TOKEN);   // 에러 핸들링이 안됨... 도저히 모르겠어서 추후 수정
+                throw new CustomException(INVALID_TOKEN);
             }
             UsernamePasswordAuthenticationToken authentication = jwtTokenProvider.getAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(authentication);

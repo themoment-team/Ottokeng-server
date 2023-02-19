@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +23,12 @@ public class UserController {
     @DeleteMapping("/logout")
     public ResponseEntity<Void> logout(HttpServletRequest request) {
         userService.logout(jwtTokenProvider.resolveToken(request));
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<Void> delete() {
+        userService.delete();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
