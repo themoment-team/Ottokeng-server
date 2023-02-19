@@ -108,4 +108,13 @@ public class JwtTokenProvider {
         return !isTokenExpired(token);
     }
 
+    public Long getExpiration(String token) {
+        Date expiration = Jwts.parserBuilder().setSigningKey(secretKey.getBytes())
+                .build().parseClaimsJws(token).getBody().getExpiration();
+
+        Long now = new Date().getTime();
+
+        return (expiration.getTime() - now);
+    }
+
 }

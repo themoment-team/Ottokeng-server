@@ -5,13 +5,15 @@ import com.example.ottokeng.domain.oauth.repository.RefreshTokenRepository;
 import com.example.ottokeng.domain.user.entity.BlackList;
 import com.example.ottokeng.domain.user.entity.User;
 import com.example.ottokeng.domain.user.repository.BlackListRepository;
-import com.example.ottokeng.domain.user.repository.UserRepository;
 import com.example.ottokeng.global.exception.CustomException;
+import com.example.ottokeng.global.security.jwt.JwtTokenProvider;
 import com.example.ottokeng.global.util.CurrentUserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.concurrent.TimeUnit;
 
 import static com.example.ottokeng.global.exception.ErrorCode.ALREADY_BLACKLIST;
 import static com.example.ottokeng.global.exception.ErrorCode.UNABLE_TO_ISSUANCE_REFRESHTOKEN;
@@ -24,6 +26,7 @@ public class UserService {
     private final RefreshTokenRepository refreshTokenRepository;
     private final RedisTemplate redisTemplate;
     private final BlackListRepository blackListRepository;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Transactional
     public void logout(String accessToken){
@@ -42,6 +45,10 @@ public class UserService {
                 .oauthId(oauthId)
                 .accessToken(accessToken)
                 .build();
+
+        Long expiration = jwtTokenProvider.getExpiration(accessToken);
+        redisTemplate.opsForValue().set(accessToken, "access_token", expiration, TimeUnit.MILLISECONDS);
+
         blackListRepository.save(blackList);
     }
 }

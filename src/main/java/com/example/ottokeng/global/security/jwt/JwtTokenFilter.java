@@ -1,7 +1,8 @@
 package com.example.ottokeng.global.security.jwt;
 
+import com.example.ottokeng.global.exception.CustomException;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -13,11 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static com.example.ottokeng.global.exception.ErrorCode.INVALID_TOKEN;
+
 @Component
 @RequiredArgsConstructor
 public class JwtTokenFilter extends OncePerRequestFilter { // OncePerRequestFilter 는 요청이 들어올 때마다 실행
 
     private final JwtTokenProvider jwtTokenProvider;
+    private final RedisTemplate redisTemplate;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -25,6 +29,9 @@ public class JwtTokenFilter extends OncePerRequestFilter { // OncePerRequestFilt
         String token = jwtTokenProvider.resolveToken(request);
 
         if (token != null && jwtTokenProvider.validateToken(token)) {
+            if(redisTemplate.opsForValue().get(token)!=null) {
+                throw new CustomException(INVALID_TOKEN);   // 에러 핸들링이 안됨... 도저히 모르겠어서 추후 수정
+            }
             UsernamePasswordAuthenticationToken authentication = jwtTokenProvider.getAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
