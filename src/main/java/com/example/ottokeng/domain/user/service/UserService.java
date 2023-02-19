@@ -2,9 +2,7 @@ package com.example.ottokeng.domain.user.service;
 
 import com.example.ottokeng.domain.oauth.entity.RefreshToken;
 import com.example.ottokeng.domain.oauth.repository.RefreshTokenRepository;
-import com.example.ottokeng.domain.user.entity.BlackList;
 import com.example.ottokeng.domain.user.entity.User;
-import com.example.ottokeng.domain.user.repository.BlackListRepository;
 import com.example.ottokeng.global.exception.CustomException;
 import com.example.ottokeng.global.security.jwt.JwtTokenProvider;
 import com.example.ottokeng.global.util.CurrentUserUtil;
@@ -25,7 +23,6 @@ public class UserService {
     private final CurrentUserUtil currentUserUtil;
     private final RefreshTokenRepository refreshTokenRepository;
     private final RedisTemplate redisTemplate;
-    private final BlackListRepository blackListRepository;
     private final JwtTokenProvider jwtTokenProvider;
 
     @Transactional
@@ -41,14 +38,8 @@ public class UserService {
         if(redisTemplate.opsForValue().get(accessToken)!=null){
             throw new CustomException(ALREADY_BLACKLIST);
         }
-        BlackList blackList = BlackList.builder()
-                .oauthId(oauthId)
-                .accessToken(accessToken)
-                .build();
 
         Long expiration = jwtTokenProvider.getExpiration(accessToken);
         redisTemplate.opsForValue().set(accessToken, "access_token", expiration, TimeUnit.MILLISECONDS);
-
-        blackListRepository.save(blackList);
     }
 }
