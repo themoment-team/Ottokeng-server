@@ -1,7 +1,7 @@
 package com.example.ottokeng.domain.find.presentation;
 
 import com.example.ottokeng.domain.find.presentation.dto.response.ShowFindResponse;
-import com.example.ottokeng.domain.find.service.FindService;
+import com.example.ottokeng.domain.find.service.FindWritingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class FindController {
 
-    private final FindService findService;
+    private final FindWritingService findWritingService;
 
     @GetMapping("/showfind")
     public ResponseEntity<ShowFindResponse> showfind(){
-        ShowFindResponse showfindResponse = findService.getFind();
+        ShowFindResponse showfindResponse = findWritingService.getFind();
         return new ResponseEntity<>(showfindResponse, HttpStatus.OK);
     }
 }
