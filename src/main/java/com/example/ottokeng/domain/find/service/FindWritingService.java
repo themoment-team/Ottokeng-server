@@ -1,7 +1,7 @@
 package com.example.ottokeng.domain.find.service;
 
-import com.example.ottokeng.domain.find.presentation.dto.response.ShowFindResponse;
+import com.example.ottokeng.domain.find.presentation.dto.response.ShowFindsResponse;
 
 public interface FindWritingService {
-    ShowFindResponse getFind();
+    ShowFindsResponse getFind();
 }
