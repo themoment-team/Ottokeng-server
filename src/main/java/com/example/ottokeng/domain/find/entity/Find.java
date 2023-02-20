@@ -1,5 +1,6 @@
 package com.example.ottokeng.domain.find.entity;
 
+import com.example.ottokeng.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,4 +21,7 @@ public class Find {
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "find")
     private List<FindWriting> findWriting;
+
+    @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "find")
+    private User user;
 }

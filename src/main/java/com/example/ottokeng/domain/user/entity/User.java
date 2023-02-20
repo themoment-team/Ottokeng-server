@@ -1,5 +1,6 @@
 package com.example.ottokeng.domain.user.entity;
 
+import com.example.ottokeng.domain.find.entity.Find;
 import com.example.ottokeng.domain.lost.entity.Lost;
 import com.example.ottokeng.global.enumType.Role;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,10 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "user")
+    @JoinColumn(name = "find")
+    private Find find;
 
     @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "user")
     @JoinColumn(name = "lost")

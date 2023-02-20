@@ -9,5 +9,5 @@ import java.util.List;
 @Builder
 @RequiredArgsConstructor
 public class ShowFindsResponse {
-    private final List<Find> list;
+    private final List<ShowFindResponse> list;
 }
