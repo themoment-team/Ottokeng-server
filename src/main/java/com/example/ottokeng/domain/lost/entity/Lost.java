@@ -1,6 +1,7 @@
 package com.example.ottokeng.domain.lost.entity;
 
 import com.example.ottokeng.domain.find.entity.FindWriting;
+import com.example.ottokeng.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,4 +22,7 @@ public class Lost {
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "lost")
     private List<LostWriting> LostWriting;
+
+    @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "lost")
+    private User user;
 }
