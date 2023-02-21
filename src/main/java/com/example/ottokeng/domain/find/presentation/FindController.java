@@ -38,4 +38,10 @@ public class FindController {
         findWritingService.patchWritingExecute(id, request);
         return new ResponseEntity<>((HttpStatus.NO_CONTENT));
     }
+
+    @DeleteMapping("/writing/{id}")
+    public ResponseEntity<Void> deleteWriting(@PathVariable Long id){
+        findWritingService.deleteWritingExecute(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
