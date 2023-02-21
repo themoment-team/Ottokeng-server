@@ -1,5 +1,6 @@
 package com.example.ottokeng.domain.find.presentation;
 
+import com.example.ottokeng.domain.find.presentation.dto.request.ModifyWritingRequest;
 import com.example.ottokeng.domain.find.presentation.dto.request.WritingRequest;
 import com.example.ottokeng.domain.find.presentation.dto.response.ShowFindResponse;
 import com.example.ottokeng.domain.find.presentation.dto.response.ShowFindsResponse;
@@ -8,10 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Null;
@@ -24,14 +22,20 @@ public class FindController {
     private final FindWritingService findWritingService;
 
     @GetMapping("/showfind")
-    public ResponseEntity<ShowFindsResponse> showfind(){
+    public ResponseEntity<ShowFindsResponse> showfind() {
         ShowFindsResponse showfindsResponse = findWritingService.getFind();
         return new ResponseEntity<>(showfindsResponse, HttpStatus.OK);
     }
 
     @PostMapping("/writing")
-    public ResponseEntity<Void> writing(@RequestBody @Valid WritingRequest writingRequest){
-        findWritingService.postWritingExecute(writingRequest);
+    public ResponseEntity<Void> postWriting(@RequestBody @Valid WritingRequest request) {
+        findWritingService.postWritingExecute(request);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PatchMapping("/writing")
+    public ResponseEntity<Void> patchWriting(@RequestBody @Valid ModifyWritingRequest request){
+        findWritingService.patchWritingExecute(request);
+        return new ResponseEntity<>((HttpStatus.NO_CONTENT));
     }
 }

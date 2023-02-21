@@ -6,5 +6,5 @@ import com.example.ottokeng.domain.find.presentation.dto.response.ShowFindsRespo
 public interface FindWritingService {
     ShowFindsResponse getFind();
 
-    void postWritingExecute(WritingRequest writingRequest);
+    void postWritingExecute(WritingRequest request);
 }
