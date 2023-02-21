@@ -1,5 +1,7 @@
 package com.example.ottokeng.domain.find.service.impl;
 
+import com.example.ottokeng.domain.find.entity.FindWriting;
+import com.example.ottokeng.domain.find.presentation.dto.request.WritingRequest;
 import com.example.ottokeng.domain.find.presentation.dto.response.ShowFindResponse;
 import com.example.ottokeng.domain.find.presentation.dto.response.ShowFindsResponse;
 import com.example.ottokeng.domain.find.repository.FindWritingRepository;
@@ -30,5 +32,19 @@ public class FindWritingServiceImpl implements FindWritingService {
         return ShowFindsResponse.builder()
                 .list(showFindResponse)
                 .build();
+    }
+
+    @Override
+    public void postWritingExecute(WritingRequest writingRequest) {
+        FindWriting findWriting = FindWriting.builder()
+                .title(writingRequest.getTitle())
+                .detail(writingRequest.getDetail())
+                .acquisition(writingRequest.getAcquisition())
+                .address(writingRequest.getAddress())
+                .image(writingRequest.getImage())
+                .communication(writingRequest.getCommunication())
+                .build();
+
+        findWritingRepsitory.save(findWriting);
     }
 }

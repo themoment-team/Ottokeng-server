@@ -1,5 +1,6 @@
 package com.example.ottokeng.domain.find.presentation;
 
+import com.example.ottokeng.domain.find.presentation.dto.request.WritingRequest;
 import com.example.ottokeng.domain.find.presentation.dto.response.ShowFindResponse;
 import com.example.ottokeng.domain.find.presentation.dto.response.ShowFindsResponse;
 import com.example.ottokeng.domain.find.service.FindWritingService;
