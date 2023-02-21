@@ -49,8 +49,8 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    public String createRefreshToken(){
-        Claims claims = Jwts.claims().setSubject(null);
+    public String createRefreshToken(String oauthId){
+        Claims claims = Jwts.claims().setSubject(oauthId);
 
         Date date = new Date();
         Date validity = new Date(date.getTime() + REFRESHTOKEN_VALIDATION_EXPIREDTIME);
