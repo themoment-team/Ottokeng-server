@@ -1,4 +1,4 @@
-package com.example.ottokeng.domain.oauth.dto;
+package com.example.ottokeng.domain.oauth.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

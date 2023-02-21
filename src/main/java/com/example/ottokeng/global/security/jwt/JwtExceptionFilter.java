@@ -1,5 +1,6 @@
 package com.example.ottokeng.global.security.jwt;
 
+import com.example.ottokeng.global.exception.CustomException;
 import com.example.ottokeng.global.exception.ErrorCode;
 import com.example.ottokeng.global.exception.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,14 +30,17 @@ public class JwtExceptionFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException {
         try {
             chain.doFilter(req, res);
+        } catch (CustomException ex) {
+            log.error("============= 커스텀 에러 =============", ex);
+            setErrorResponse(ex.getErrorCode(), res);
         } catch (ExpiredJwtException ex) {
             log.error("============= 토큰의 유효기간이 만료 =============", ex);
             setErrorResponse(EXPIRED_TOKEN, res);
         } catch (JwtException ex) {
             log.error("============= 유효하지 않은 토큰 =============", ex);
             setErrorResponse(INVALID_TOKEN, res);
-        } catch (Exception e) {
-            log.error("============= 알 수 없는 에러 발생 =============", e);
+        } catch (Exception ex) {
+            log.error("============= 알 수 없는 에러 발생 =============", ex);
             setErrorResponse(UNKNOWN_ERROR, res);
         }
     }
