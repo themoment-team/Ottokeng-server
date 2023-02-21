@@ -10,7 +10,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Builder
 @RequiredArgsConstructor
 public class ShowFindResponse {
     @Id
