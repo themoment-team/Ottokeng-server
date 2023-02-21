@@ -30,12 +30,12 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "user")
-    @JoinColumn(name = "find")
+    @OneToOne
+    @JoinColumn(name = "find_id")
     private Find find;
 
-    @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "user")
-    @JoinColumn(name = "lost")
+    @OneToOne
+    @JoinColumn(name = "lost_id")
     private Lost lost;
 
     public User update(String name, String imageUrl) {

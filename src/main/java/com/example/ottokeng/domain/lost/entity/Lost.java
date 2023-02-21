@@ -21,8 +21,8 @@ public class Lost {
     private Long id;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "lost")
-    private List<LostWriting> LostWriting;
+    private List<LostWriting> lostWriting;
 
-    @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "lost")
+    @OneToOne(mappedBy = "lost")
     private User user;
 }

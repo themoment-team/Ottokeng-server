@@ -22,6 +22,6 @@ public class Find {
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "find")
     private List<FindWriting> findWriting;
 
-    @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "find")
+    @OneToOne(mappedBy = "find")
     private User user;
 }
