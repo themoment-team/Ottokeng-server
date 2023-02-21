@@ -33,9 +33,9 @@ public class FindController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PatchMapping("/writing")
-    public ResponseEntity<Void> patchWriting(@RequestBody @Valid ModifyWritingRequest request){
-        findWritingService.patchWritingExecute(request);
+    @PatchMapping("/writing/{id}")
+    public ResponseEntity<Void> patchWriting(@PathVariable Long id, @RequestBody @Valid ModifyWritingRequest request){
+        findWritingService.patchWritingExecute(id, request);
         return new ResponseEntity<>((HttpStatus.NO_CONTENT));
     }
 }
