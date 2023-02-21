@@ -1,6 +1,6 @@
 package com.example.ottokeng.domain.user.service;
 
-import com.example.ottokeng.domain.oauth.dto.RefreshToken;
+import com.example.ottokeng.domain.oauth.entity.RefreshToken;
 import com.example.ottokeng.domain.oauth.repository.RefreshTokenRepository;
 import com.example.ottokeng.domain.user.repository.UserRepository;
 import com.example.ottokeng.global.exception.CustomException;
