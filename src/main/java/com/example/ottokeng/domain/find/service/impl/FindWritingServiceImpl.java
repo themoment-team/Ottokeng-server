@@ -63,4 +63,9 @@ public class FindWritingServiceImpl implements FindWritingService {
                 request.getAddress(),
                 request.getCommunication());
     }
+
+    @Override
+    public void deleteWritingExecute(Long id) {
+        findWritingRepsitory.deleteById(id);
+    }
 }

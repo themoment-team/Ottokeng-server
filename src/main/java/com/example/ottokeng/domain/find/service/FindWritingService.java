@@ -10,4 +10,6 @@ public interface FindWritingService {
     void postWritingExecute(WritingRequest request);
 
     void patchWritingExecute(Long id, ModifyWritingRequest request);
+
+    void deleteWritingExecute(Long id);
 }
