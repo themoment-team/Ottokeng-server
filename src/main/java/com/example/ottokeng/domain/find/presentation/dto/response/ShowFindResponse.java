@@ -12,26 +12,18 @@ import javax.persistence.Id;
 
 @RequiredArgsConstructor
 public class ShowFindResponse {
-    @Id
-    @GeneratedValue
     private Long id;
-
     private String title;
-
     private String detail;
-
-    @Enumerated(EnumType.STRING)
     private Acquisition acquisition;
-
     private String image;
-
     private String address;
-
     private String communication;
 
     public ShowFindResponse(FindWriting findWriting){
         this.id = findWriting.getId();
         this.title = findWriting.getTitle();
+        this.detail = findWriting.getDetail();
         this.acquisition = findWriting.getAcquisition();
         this.image = findWriting.getImage();
         this.address = findWriting.getAddress();

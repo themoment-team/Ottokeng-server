@@ -11,7 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class FindWriting {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
     private String title;
