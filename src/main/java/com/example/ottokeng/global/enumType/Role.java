@@ -2,6 +2,6 @@ package com.example.ottokeng.global.enumType;
 
 public enum Role {
 
-    USER, ROLE
+    ROLE_USER, ROLE_ADMIN
 
 }
