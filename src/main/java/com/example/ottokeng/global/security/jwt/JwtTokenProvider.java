@@ -49,8 +49,8 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    public String createRefreshToken(){
-        Claims claims = Jwts.claims().setSubject(null);
+    public String createRefreshToken(String oauthId){
+        Claims claims = Jwts.claims().setSubject(oauthId);
 
         Date date = new Date();
         Date validity = new Date(date.getTime() + REFRESHTOKEN_VALIDATION_EXPIREDTIME);
@@ -106,6 +106,15 @@ public class JwtTokenProvider {
 
     public boolean validateToken(String token) {
         return !isTokenExpired(token);
+    }
+
+    public Long getExpiration(String token) {
+        Date expiration = Jwts.parserBuilder().setSigningKey(secretKey.getBytes())
+                .build().parseClaimsJws(token).getBody().getExpiration();
+
+        Long now = new Date().getTime();
+
+        return (expiration.getTime() - now);
     }
 
 }

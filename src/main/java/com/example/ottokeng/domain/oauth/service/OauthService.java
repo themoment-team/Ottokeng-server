@@ -4,7 +4,7 @@ import com.example.ottokeng.domain.oauth.config.OauthAttributes;
 import com.example.ottokeng.domain.oauth.config.OauthProvider;
 import com.example.ottokeng.domain.oauth.dto.LoginResponse;
 import com.example.ottokeng.domain.oauth.dto.OauthTokenResponse;
-import com.example.ottokeng.domain.oauth.dto.RefreshToken;
+import com.example.ottokeng.domain.oauth.entity.RefreshToken;
 import com.example.ottokeng.domain.oauth.dto.UserProfile;
 import com.example.ottokeng.domain.oauth.repository.InMemoryProviderRepository;
 import com.example.ottokeng.domain.oauth.repository.RefreshTokenRepository;
@@ -41,7 +41,7 @@ public class OauthService {
         User user = saveOrUpdate(userProfile);
 
         String accessToken = jwtTokenProvider.createAccessToken(user.getOauthId());
-        String refreshToken = jwtTokenProvider.createRefreshToken();
+        String refreshToken = jwtTokenProvider.createRefreshToken(user.getOauthId());
 
         RefreshToken entityToRedis = new RefreshToken(user.getOauthId(), refreshToken, jwtTokenProvider.getREFRESHTOKEN_VALIDATION_EXPIREDTIME());
         refreshTokenRepository.save(entityToRedis);
