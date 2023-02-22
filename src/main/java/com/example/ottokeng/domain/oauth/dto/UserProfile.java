@@ -25,7 +25,7 @@ public class UserProfile {
                 .oauthId(oauthId)
                 .name(name)
                 .imageUrl(imageUrl)
-                .role(Role.USER)
+                .role(Role.ROLE_USER)
                 .build();
     }
 }
