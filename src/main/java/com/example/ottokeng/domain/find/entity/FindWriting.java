@@ -18,6 +18,10 @@ public class FindWriting {
 
     private String detail;
 
+    private String date;
+
+    private String name;
+
     @Enumerated(EnumType.STRING)
     private Acquisition acquisition;
 
@@ -27,9 +31,10 @@ public class FindWriting {
 
     private String communication;
 
-    public void update(String title, String detail, Acquisition acquisition, String image, String address, String communication){
+    public void update(String title, String detail, String name, Acquisition acquisition, String image, String address, String communication){
         this.title = title;
         this.detail = detail;
+        this.name = name;
         this.acquisition = acquisition;
         this.image = image;
         this.address = address;

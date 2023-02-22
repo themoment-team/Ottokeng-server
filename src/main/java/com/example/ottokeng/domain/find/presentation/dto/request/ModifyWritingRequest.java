@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 public class ModifyWritingRequest {
     private String title;
     private String detail;
+    private String name;
     private Acquisition acquisition;
     private String image;
     private String address;

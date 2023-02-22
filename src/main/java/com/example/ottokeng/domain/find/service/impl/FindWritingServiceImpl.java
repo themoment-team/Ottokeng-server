@@ -58,6 +58,7 @@ public class FindWritingServiceImpl implements FindWritingService {
         findWriting.update(
                 request.getTitle(),
                 request.getDetail(),
+                request.getName(),
                 request.getAcquisition(),
                 request.getImage(),
                 request.getAddress(),
