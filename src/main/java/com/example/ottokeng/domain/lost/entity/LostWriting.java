@@ -30,6 +30,15 @@ public class LostWriting {
 
     private String communication;
 
+    public void update(String title, String detail, Relay relay, String image, String address, String communication){
+        this.title = title;
+        this.detail = detail;
+        this.relay = relay;
+        this.image = image;
+        this.address = address;
+        this.communication = communication;
+    }
+
     @ManyToOne
     @JoinColumn(name = "lost")
     private Lost lost;
