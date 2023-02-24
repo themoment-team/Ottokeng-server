@@ -16,6 +16,7 @@ build/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
+application.yml
 
 ### IntelliJ IDEA ###
 .idea
@@ -25,7 +26,6 @@ bin/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
-application.yml
 
 ### NetBeans ###
 /nbproject/private/
