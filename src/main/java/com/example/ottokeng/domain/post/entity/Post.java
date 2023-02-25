@@ -1,4 +1,4 @@
-package com.example.ottokeng.domain.lost.entity;
+package com.example.ottokeng.domain.post.entity;
 
 import com.example.ottokeng.domain.user.entity.User;
 import lombok.AllArgsConstructor;

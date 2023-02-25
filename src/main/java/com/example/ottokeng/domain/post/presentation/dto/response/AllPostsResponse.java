@@ -1,4 +1,4 @@
-package com.example.ottokeng.domain.lost.presentation.dto.response;
+package com.example.ottokeng.domain.post.presentation.dto.response;
 
 import lombok.Builder;
 import lombok.Getter;

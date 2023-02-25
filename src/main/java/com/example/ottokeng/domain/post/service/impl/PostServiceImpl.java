@@ -1,12 +1,12 @@
-package com.example.ottokeng.domain.lost.service.impl;
+package com.example.ottokeng.domain.post.service.impl;
 
-import com.example.ottokeng.domain.lost.entity.Post;
-import com.example.ottokeng.domain.lost.presentation.dto.request.PostWritingRequest;
-import com.example.ottokeng.domain.lost.presentation.dto.request.ModifyPostWritingRequest;
-import com.example.ottokeng.domain.lost.presentation.dto.response.AllPostsResponse;
-import com.example.ottokeng.domain.lost.presentation.dto.response.ShowPostResponse;
-import com.example.ottokeng.domain.lost.repository.PostRepository;
-import com.example.ottokeng.domain.lost.service.PostService;
+import com.example.ottokeng.domain.post.entity.Post;
+import com.example.ottokeng.domain.post.presentation.dto.request.PostWritingRequest;
+import com.example.ottokeng.domain.post.presentation.dto.request.ModifyPostWritingRequest;
+import com.example.ottokeng.domain.post.presentation.dto.response.AllPostsResponse;
+import com.example.ottokeng.domain.post.presentation.dto.response.ShowPostResponse;
+import com.example.ottokeng.domain.post.repository.PostRepository;
+import com.example.ottokeng.domain.post.service.PostService;
 import com.example.ottokeng.domain.user.entity.User;
 import com.example.ottokeng.domain.user.repository.UserRepository;
 import com.example.ottokeng.global.exception.CustomException;
@@ -16,7 +16,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,7 +43,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public void postWritingExecute(PostWritingRequest request) {
         User user = userUtil.getCurrentUser();
-        Post lostWriting = Post.builder()
+        Post post = Post.builder()
                 .title(request.getTitle())
                 .contents(request.getContents())
                 .date(request.getDate())
@@ -56,16 +55,16 @@ public class PostServiceImpl implements PostService {
                 .user(user)
                 .build();
 
-        postRepository.save(lostWriting);
+        postRepository.save(post);
     }
 
     @Override
     public void patchWritingExecutte(Long id, ModifyPostWritingRequest request) {
-        Post lostWriting = postRepository
+        Post post = postRepository
                 .findById(id).orElseThrow(()->
-                        new CustomException(ErrorCode.LOST_WRITING_NOT_FOUND));
+                        new CustomException(ErrorCode.POST_NOT_FOUND));
 
-        lostWriting.update(
+        post.update(
                 request.getTitle(),
                 request.getContents(),
                 request.getDate(),

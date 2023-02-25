@@ -1,4 +1,4 @@
-package com.example.ottokeng.domain.lost.entity;
+package com.example.ottokeng.domain.post.entity;
 
 public enum Type {
     LOST_WRITING,

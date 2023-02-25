@@ -1,8 +1,8 @@
-package com.example.ottokeng.domain.lost.presentation.dto.response;
+package com.example.ottokeng.domain.post.presentation.dto.response;
 
-import com.example.ottokeng.domain.lost.entity.Post;
-import com.example.ottokeng.domain.lost.entity.Get;
-import com.example.ottokeng.domain.lost.entity.Type;
+import com.example.ottokeng.domain.post.entity.Post;
+import com.example.ottokeng.domain.post.entity.Get;
+import com.example.ottokeng.domain.post.entity.Type;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
