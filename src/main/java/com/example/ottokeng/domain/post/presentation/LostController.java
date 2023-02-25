@@ -1,9 +1,9 @@
-package com.example.ottokeng.domain.lost.presentation;
+package com.example.ottokeng.domain.post.presentation;
 
-import com.example.ottokeng.domain.lost.presentation.dto.request.PostWritingRequest;
-import com.example.ottokeng.domain.lost.presentation.dto.request.ModifyPostWritingRequest;
-import com.example.ottokeng.domain.lost.presentation.dto.response.AllPostsResponse;
-import com.example.ottokeng.domain.lost.service.PostService;
+import com.example.ottokeng.domain.post.presentation.dto.request.PostWritingRequest;
+import com.example.ottokeng.domain.post.presentation.dto.request.ModifyPostWritingRequest;
+import com.example.ottokeng.domain.post.presentation.dto.response.AllPostsResponse;
+import com.example.ottokeng.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
