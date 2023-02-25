@@ -19,15 +19,15 @@ public class ShowPostResponse {
     private String communication;
     private Type type;
 
-    public ShowPostResponse(Post lostWriting){
-        this.id = lostWriting.getId();
-        this.title = lostWriting.getTitle();
-        this.contents = lostWriting.getContents();
-        this.name = lostWriting.getUser().getName();
-        this.acquire = lostWriting.getAcquire();
-        this.image = lostWriting.getImage();
-        this.address = lostWriting.getAddress();
-        this.communication = lostWriting.getCommunication();
-        this.type = lostWriting.getType();
+    public ShowPostResponse(Post post){
+        this.id = post.getId();
+        this.title = post.getTitle();
+        this.contents = post.getContents();
+        this.name = post.getUser().getName();
+        this.acquire = post.getAcquire();
+        this.image = post.getImage();
+        this.address = post.getAddress();
+        this.communication = post.getCommunication();
+        this.type = post.getType();
     }
 }
