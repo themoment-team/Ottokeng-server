@@ -6,6 +6,8 @@ import com.example.ottokeng.domain.post.entity.Type;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @AllArgsConstructor
 public class ShowPostResponse {
@@ -18,6 +20,7 @@ public class ShowPostResponse {
     private String address;
     private String communication;
     private Type type;
+    private LocalDateTime createdAt;
 
     public ShowPostResponse(Post post){
         this.id = post.getId();
@@ -29,5 +32,6 @@ public class ShowPostResponse {
         this.address = post.getAddress();
         this.communication = post.getCommunication();
         this.type = post.getType();
+        this.createdAt = post.getCreatedAt();
     }
 }
