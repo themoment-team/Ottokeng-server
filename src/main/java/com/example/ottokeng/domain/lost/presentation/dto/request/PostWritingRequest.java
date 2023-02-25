@@ -4,9 +4,11 @@ import com.example.ottokeng.domain.lost.entity.Get;
 import com.example.ottokeng.domain.lost.entity.Type;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class PostWritingRequest {
     private String title;
     private String contents;
