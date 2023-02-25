@@ -27,7 +27,7 @@ public class Post {
     private String date;
 
     @Enumerated(EnumType.STRING)
-    private Get get;
+    private Get acquire;
 
     private String image;
 
@@ -38,11 +38,11 @@ public class Post {
     @Enumerated(EnumType.STRING)
     private Type type;
 
-    public void update(String title, String contents, String date, Get get, String image, String address, String communication, Type type){
+    public void update(String title, String contents, String date, Get acquire, String image, String address, String communication, Type type){
         this.title = title;
         this.contents = contents;
         this.date = date;
-        this.get = get;
+        this.acquire = acquire;
         this.image = image;
         this.address = address;
         this.communication = communication;

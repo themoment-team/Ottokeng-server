@@ -2,8 +2,8 @@ package com.example.ottokeng.domain.lost.presentation;
 
 import com.example.ottokeng.domain.lost.presentation.dto.request.PostWritingRequest;
 import com.example.ottokeng.domain.lost.presentation.dto.request.ModifyPostWritingRequest;
-import com.example.ottokeng.domain.lost.presentation.dto.response.ShowPostsResponse;
-import com.example.ottokeng.domain.lost.service.LostWritingService;
+import com.example.ottokeng.domain.lost.presentation.dto.response.AllPostsResponse;
+import com.example.ottokeng.domain.lost.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/lost")
+@RequestMapping("/post")
 public class LostController {
-    private final LostWritingService lostWritingService;
+    private final PostService lostWritingService;
 
     @GetMapping("/writing")
-    public ResponseEntity<ShowPostsResponse> showlost(){
-        ShowPostsResponse showLostsResponse = lostWritingService.getLost();
+    public ResponseEntity<AllPostsResponse> showlost(){
+        AllPostsResponse showLostsResponse = lostWritingService.getAllPost();
         return new ResponseEntity<>(showLostsResponse, HttpStatus.OK);
     }
 

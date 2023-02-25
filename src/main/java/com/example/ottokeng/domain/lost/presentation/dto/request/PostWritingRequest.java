@@ -11,7 +11,7 @@ public class PostWritingRequest {
     private String title;
     private String contents;
     private String date;
-    private Get get;
+    private Get acquire;
     private String image;
     private String address;
     private String communication;

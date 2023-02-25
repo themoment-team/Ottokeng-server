@@ -2,10 +2,10 @@ package com.example.ottokeng.domain.lost.service;
 
 import com.example.ottokeng.domain.lost.presentation.dto.request.PostWritingRequest;
 import com.example.ottokeng.domain.lost.presentation.dto.request.ModifyPostWritingRequest;
-import com.example.ottokeng.domain.lost.presentation.dto.response.ShowPostsResponse;
+import com.example.ottokeng.domain.lost.presentation.dto.response.AllPostsResponse;
 
-public interface LostWritingService {
-    ShowPostsResponse getLost();
+public interface PostService {
+    AllPostsResponse getAllPost();
 
     void postWritingExecute(PostWritingRequest request);
 

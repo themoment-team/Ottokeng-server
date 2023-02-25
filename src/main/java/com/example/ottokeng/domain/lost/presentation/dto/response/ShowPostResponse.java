@@ -14,7 +14,7 @@ public class ShowPostResponse {
     private String contents;
     private String name;
     private String date;
-    private Get get;
+    private Get acquire;
     private String image;
     private String address;
     private String communication;
@@ -26,7 +26,7 @@ public class ShowPostResponse {
         this.contents = lostWriting.getContents();
         this.name = lostWriting.getName();
         this.date = lostWriting.getDate();
-        this.get = lostWriting.getGet();
+        this.acquire = lostWriting.getAcquire();
         this.image = lostWriting.getImage();
         this.address = lostWriting.getAddress();
         this.communication = lostWriting.getCommunication();

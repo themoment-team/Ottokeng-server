@@ -12,7 +12,7 @@ public class ModifyPostWritingRequest {
     private String contents;
     private String name;
     private String date;
-    private Get get;
+    private Get acquire;
     private String image;
     private String address;
     private String communication;

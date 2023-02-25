@@ -9,6 +9,6 @@ import java.util.List;
 @Getter
 @Builder
 @RequiredArgsConstructor
-public class ShowPostsResponse {
+public class AllPostsResponse {
     private final List<ShowPostResponse> list;
 }
