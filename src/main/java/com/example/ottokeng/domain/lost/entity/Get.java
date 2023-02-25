@@ -1,6 +1,6 @@
 package com.example.ottokeng.domain.lost.entity;
 
-public enum Relay {
-    RELAY,
-    UNRELAY
+public enum Get {
+    GET,
+    NOT_GET
 }

@@ -1,10 +1,10 @@
 package com.example.ottokeng.domain.lost.service.impl;
 
-import com.example.ottokeng.domain.lost.entity.LostWriting;
-import com.example.ottokeng.domain.lost.presentation.dto.request.LostWritingRequest;
-import com.example.ottokeng.domain.lost.presentation.dto.request.ModifyLostWritingRequest;
-import com.example.ottokeng.domain.lost.presentation.dto.response.ShowLostResponse;
-import com.example.ottokeng.domain.lost.presentation.dto.response.ShowLostsResponse;
+import com.example.ottokeng.domain.lost.entity.Post;
+import com.example.ottokeng.domain.lost.presentation.dto.request.PostWritingRequest;
+import com.example.ottokeng.domain.lost.presentation.dto.request.ModifyPostWritingRequest;
+import com.example.ottokeng.domain.lost.presentation.dto.response.ShowPostResponse;
+import com.example.ottokeng.domain.lost.presentation.dto.response.ShowPostsResponse;
 import com.example.ottokeng.domain.lost.repository.LostWritingRepository;
 import com.example.ottokeng.domain.lost.service.LostWritingService;
 import com.example.ottokeng.domain.user.entity.User;
@@ -28,44 +28,51 @@ public class LostWritingServiceImpl implements LostWritingService {
     private final LostWritingRepository lostWritingRepository;
 
     @Override
-    public ShowLostsResponse getLost() {
+    public ShowPostsResponse getLost() {
         User user = userUtil.getCurrentUser();
-        List<ShowLostResponse> showLostResponses = user.getLost().getLostWriting()
+        List<ShowPostResponse> showLostResponses = user.getLostWriting()
                 .stream()
-                .map(ShowLostResponse::new)
+                .map(ShowPostResponse::new)
                 .collect(Collectors.toList());
-        return ShowLostsResponse.builder()
+        return ShowPostsResponse.builder()
                 .list(showLostResponses)
                 .build();
     }
 
     @Override
-    public void postWritingExecute(LostWritingRequest request) {
-        LostWriting lostWriting = LostWriting.builder()
+    public void postWritingExecute(PostWritingRequest request) {
+        User user = userUtil.getCurrentUser();
+        Post lostWriting = Post.builder()
                 .title(request.getTitle())
-                .detail(request.getDetail())
+                .contents(request.getContents())
+                .name(user.getName())
+                .date(request.getDate())
                 .image(request.getImage())
-                .relay(request.getRelay())
+                .get(request.getGet())
                 .address(request.getAddress())
                 .communication(request.getCommunication())
+                .type(request.getType())
+                .user(userUtil.getCurrentUser())
                 .build();
 
         lostWritingRepository.save(lostWriting);
     }
 
     @Override
-    public void patchWritingExecutte(Long id, ModifyLostWritingRequest request) {
-        LostWriting lostWriting = lostWritingRepository
+    public void patchWritingExecutte(Long id, ModifyPostWritingRequest request) {
+        Post lostWriting = lostWritingRepository
                 .findById(id).orElseThrow(()->
                         new CustomException(ErrorCode.LOST_WRITING_NOT_FOUND));
 
         lostWriting.update(
                 request.getTitle(),
-                request.getDetail(),
-                request.getRelay(),
+                request.getContents(),
+                request.getDate(),
+                request.getGet(),
                 request.getImage(),
                 request.getAddress(),
-                request.getCommunication());
+                request.getCommunication(),
+                request.getType());
     }
 
     @Override

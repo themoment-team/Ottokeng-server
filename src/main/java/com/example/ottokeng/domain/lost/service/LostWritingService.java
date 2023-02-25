@@ -1,15 +1,15 @@
 package com.example.ottokeng.domain.lost.service;
 
-import com.example.ottokeng.domain.lost.presentation.dto.request.LostWritingRequest;
-import com.example.ottokeng.domain.lost.presentation.dto.request.ModifyLostWritingRequest;
-import com.example.ottokeng.domain.lost.presentation.dto.response.ShowLostsResponse;
+import com.example.ottokeng.domain.lost.presentation.dto.request.PostWritingRequest;
+import com.example.ottokeng.domain.lost.presentation.dto.request.ModifyPostWritingRequest;
+import com.example.ottokeng.domain.lost.presentation.dto.response.ShowPostsResponse;
 
 public interface LostWritingService {
-    ShowLostsResponse getLost();
+    ShowPostsResponse getLost();
 
-    void postWritingExecute(LostWritingRequest request);
+    void postWritingExecute(PostWritingRequest request);
 
-    void patchWritingExecutte(Long id, ModifyLostWritingRequest request);
+    void patchWritingExecutte(Long id, ModifyPostWritingRequest request);
 
     void deleteWritingExecute(Long id);
 }

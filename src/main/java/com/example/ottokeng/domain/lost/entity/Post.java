@@ -1,5 +1,6 @@
 package com.example.ottokeng.domain.lost.entity;
 
+import com.example.ottokeng.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,17 +13,21 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LostWriting {
+public class Post {
     @Id
     @GeneratedValue
     private Long id;
 
     private String title;
 
-    private String detail;
+    private String contents;
+
+    private String name;
+
+    private String date;
 
     @Enumerated(EnumType.STRING)
-    private Relay relay;
+    private Get get;
 
     private String image;
 
@@ -30,16 +35,21 @@ public class LostWriting {
 
     private String communication;
 
-    public void update(String title, String detail, Relay relay, String image, String address, String communication){
+    @Enumerated(EnumType.STRING)
+    private Type type;
+
+    public void update(String title, String contents, String date, Get get, String image, String address, String communication, Type type){
         this.title = title;
-        this.detail = detail;
-        this.relay = relay;
+        this.contents = contents;
+        this.date = date;
+        this.get = get;
         this.image = image;
         this.address = address;
         this.communication = communication;
+        this.type = type;
     }
 
     @ManyToOne
-    @JoinColumn(name = "lost")
-    private Lost lost;
+    @JoinColumn(name = "user")
+    private User user;
 }

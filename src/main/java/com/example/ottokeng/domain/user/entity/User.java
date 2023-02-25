@@ -1,7 +1,7 @@
 package com.example.ottokeng.domain.user.entity;
 
 import com.example.ottokeng.domain.find.entity.Find;
-import com.example.ottokeng.domain.lost.entity.Lost;
+import com.example.ottokeng.domain.lost.entity.Post;
 import com.example.ottokeng.global.enumType.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Entity
@@ -34,9 +35,8 @@ public class User {
     @JoinColumn(name = "find_id")
     private Find find;
 
-    @OneToOne
-    @JoinColumn(name = "lost_id")
-    private Lost lost;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
+    private List<Post> lostWriting;
 
     public User update(String name, String imageUrl) {
         this.name = name;
