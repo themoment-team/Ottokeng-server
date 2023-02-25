@@ -47,14 +47,13 @@ public class PostServiceImpl implements PostService {
         Post lostWriting = Post.builder()
                 .title(request.getTitle())
                 .contents(request.getContents())
-                .name(user.getName())
                 .date(request.getDate())
                 .image(request.getImage())
                 .acquire(request.getAcquire())
                 .address(request.getAddress())
                 .communication(request.getCommunication())
                 .type(request.getType())
-                .user(userUtil.getCurrentUser())
+                .user(user)
                 .build();
 
         postRepository.save(lostWriting);

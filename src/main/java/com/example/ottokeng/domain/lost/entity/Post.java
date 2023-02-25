@@ -22,8 +22,6 @@ public class Post {
 
     private String contents;
 
-    private String name;
-
     private String date;
 
     @Enumerated(EnumType.STRING)

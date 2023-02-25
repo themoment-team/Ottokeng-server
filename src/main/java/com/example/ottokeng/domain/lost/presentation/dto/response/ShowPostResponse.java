@@ -24,7 +24,7 @@ public class ShowPostResponse {
         this.id = lostWriting.getId();
         this.title = lostWriting.getTitle();
         this.contents = lostWriting.getContents();
-        this.name = lostWriting.getName();
+        this.name = lostWriting.getUser().getName();
         this.date = lostWriting.getDate();
         this.acquire = lostWriting.getAcquire();
         this.image = lostWriting.getImage();

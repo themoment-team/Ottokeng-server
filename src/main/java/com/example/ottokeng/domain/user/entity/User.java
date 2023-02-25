@@ -1,10 +1,7 @@
 package com.example.ottokeng.domain.user.entity;
 
-<<<<<<< HEAD
-import com.example.ottokeng.domain.post.entity.Post;
-=======
+
 import com.example.ottokeng.domain.lost.entity.Post;
->>>>>>> 04808687a500286a6c3539bc63b25f7eb0402c1e
 import com.example.ottokeng.global.enumType.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
