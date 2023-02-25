@@ -13,7 +13,6 @@ public class ShowPostResponse {
     private String title;
     private String contents;
     private String name;
-    private String date;
     private Get acquire;
     private String image;
     private String address;
@@ -25,7 +24,6 @@ public class ShowPostResponse {
         this.title = lostWriting.getTitle();
         this.contents = lostWriting.getContents();
         this.name = lostWriting.getUser().getName();
-        this.date = lostWriting.getDate();
         this.acquire = lostWriting.getAcquire();
         this.image = lostWriting.getImage();
         this.address = lostWriting.getAddress();

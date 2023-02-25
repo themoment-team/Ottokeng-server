@@ -12,8 +12,6 @@ import lombok.NoArgsConstructor;
 public class ModifyPostWritingRequest {
     private String title;
     private String contents;
-    private String name;
-    private String date;
     private Get acquire;
     private String image;
     private String address;

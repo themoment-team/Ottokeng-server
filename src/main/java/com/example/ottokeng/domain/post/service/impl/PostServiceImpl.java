@@ -46,7 +46,6 @@ public class PostServiceImpl implements PostService {
         Post post = Post.builder()
                 .title(request.getTitle())
                 .contents(request.getContents())
-                .date(request.getDate())
                 .image(request.getImage())
                 .acquire(request.getAcquire())
                 .address(request.getAddress())
@@ -67,7 +66,6 @@ public class PostServiceImpl implements PostService {
         post.update(
                 request.getTitle(),
                 request.getContents(),
-                request.getDate(),
                 request.getAcquire(),
                 request.getImage(),
                 request.getAddress(),
