@@ -1,6 +1,7 @@
 package com.example.ottokeng.domain.comment.service;
 
 import com.example.ottokeng.domain.comment.dto.AddCommentRequest;
+import com.example.ottokeng.domain.comment.dto.ModifyCommentRequest;
 import com.example.ottokeng.domain.comment.entity.Comment;
 import com.example.ottokeng.domain.comment.repository.CommentRepository;
 import com.example.ottokeng.domain.post.entity.Post;
@@ -38,5 +39,13 @@ public class CommentService {
         post.getComments().add(comment);
 
         commentRepository.save(comment);
+    }
+
+    @Transactional
+    public void modifyComment(ModifyCommentRequest request) {
+        Comment comment = commentRepository.findById(request.getCommentId())
+                .orElseThrow(() -> new CustomException(ErrorCode.COMMENT_NOT_FOUND));
+
+        comment.modifyContents(request.getContents());
     }
 }

@@ -1,14 +1,12 @@
 package com.example.ottokeng.domain.comment.controller;
 
 import com.example.ottokeng.domain.comment.dto.AddCommentRequest;
+import com.example.ottokeng.domain.comment.dto.ModifyCommentRequest;
 import com.example.ottokeng.domain.comment.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,5 +19,11 @@ public class CommentController {
     public ResponseEntity<Void> commentAdd(@RequestBody AddCommentRequest request) {
         commentService.addComment(request);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PatchMapping
+    public ResponseEntity<Void> commentModify(@RequestBody ModifyCommentRequest request) {
+        commentService.modifyComment(request);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
