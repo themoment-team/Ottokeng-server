@@ -1,6 +1,7 @@
 package com.example.ottokeng.domain.comment.service;
 
 import com.example.ottokeng.domain.comment.dto.AddCommentRequest;
+import com.example.ottokeng.domain.comment.dto.CommentResponse;
 import com.example.ottokeng.domain.comment.dto.ModifyCommentRequest;
 import com.example.ottokeng.domain.comment.entity.Comment;
 import com.example.ottokeng.domain.comment.repository.CommentRepository;
@@ -14,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -55,5 +58,16 @@ public class CommentService {
                 .orElseThrow(() -> new CustomException(ErrorCode.COMMENT_NOT_FOUND));
 
         commentRepository.delete(comment);
+    }
+
+    @Transactional
+    public List<CommentResponse> findCommentList(Long postId) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new CustomException(ErrorCode.POST_NOT_FOUND));
+
+        return post.getComments()
+                .stream()
+                .map(CommentResponse::new)
+                .collect(Collectors.toList());
     }
 }
