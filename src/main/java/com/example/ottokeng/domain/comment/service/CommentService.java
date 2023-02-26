@@ -1,6 +1,6 @@
 package com.example.ottokeng.domain.comment.service;
 
-import com.example.ottokeng.domain.comment.dto.SaveCommentRequest;
+import com.example.ottokeng.domain.comment.dto.AddCommentRequest;
 import com.example.ottokeng.domain.comment.entity.Comment;
 import com.example.ottokeng.domain.comment.repository.CommentRepository;
 import com.example.ottokeng.domain.post.entity.Post;
@@ -23,7 +23,7 @@ public class CommentService {
     private final PostRepository postRepository;
 
     @Transactional
-    public void addComment(SaveCommentRequest request) {
+    public void addComment(AddCommentRequest request) {
         User currentUser = currentUserUtil.getCurrentUser();
         Post post = postRepository.findById(request.getBoardId())
                 .orElseThrow(() -> new CustomException(ErrorCode.POST_NOT_FOUND));

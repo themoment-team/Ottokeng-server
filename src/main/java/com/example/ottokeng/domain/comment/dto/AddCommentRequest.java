@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SaveCommentRequest {
+public class AddCommentRequest {
 
     private String contents;
     private Long boardId;

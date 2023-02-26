@@ -1,6 +1,6 @@
 package com.example.ottokeng.domain.comment.controller;
 
-import com.example.ottokeng.domain.comment.dto.SaveCommentRequest;
+import com.example.ottokeng.domain.comment.dto.AddCommentRequest;
 import com.example.ottokeng.domain.comment.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,7 +18,7 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping
-    public ResponseEntity<Void> commentAdd(@RequestBody SaveCommentRequest request) {
+    public ResponseEntity<Void> commentAdd(@RequestBody AddCommentRequest request) {
         commentService.addComment(request);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
