@@ -22,11 +22,11 @@ public class ShowPostResponse {
     private Type type;
     private LocalDateTime createdAt;
 
-    public ShowPostResponse(Post post){
+    public ShowPostResponse(Post post, String name){
         this.id = post.getId();
         this.title = post.getTitle();
         this.contents = post.getContents();
-        this.name = post.getUser().getName();
+        this.name = name;
         this.acquire = post.getAcquire();
         this.image = post.getImage();
         this.address = post.getAddress();

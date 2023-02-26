@@ -35,6 +35,10 @@ public class Post extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private Type type;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public void update(String title, String contents, Get acquire, String image, String address, String communication, Type type){
         this.title = title;
         this.contents = contents;
@@ -45,7 +49,4 @@ public class Post extends BaseTimeEntity {
         this.type = type;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "user")
-    private User user;
 }

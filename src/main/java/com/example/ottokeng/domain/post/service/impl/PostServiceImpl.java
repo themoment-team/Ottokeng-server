@@ -31,9 +31,11 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public AllPostsResponse getAllPost() {
+        User user = userUtil.getCurrentUser();
+
         List<ShowPostResponse> showPostResponses = postRepository.findAll()
                 .stream()
-                .map(ShowPostResponse::new)
+                .map(post -> new ShowPostResponse(post,user.getName()))
                 .collect(Collectors.toList());
         return AllPostsResponse.builder()
                 .list(showPostResponses)
@@ -53,6 +55,8 @@ public class PostServiceImpl implements PostService {
                 .type(request.getType())
                 .user(user)
                 .build();
+
+        user.getPosts().add(post);
 
         postRepository.save(post);
     }
