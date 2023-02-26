@@ -38,7 +38,7 @@ public class Post extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private Type type;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
