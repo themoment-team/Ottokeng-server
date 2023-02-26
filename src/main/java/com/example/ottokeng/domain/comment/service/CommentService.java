@@ -42,8 +42,8 @@ public class CommentService {
     }
 
     @Transactional
-    public void modifyComment(ModifyCommentRequest request) {
-        Comment comment = commentRepository.findById(request.getCommentId())
+    public void modifyComment(Long commentId, ModifyCommentRequest request) {
+        Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new CustomException(ErrorCode.COMMENT_NOT_FOUND));
 
         comment.modifyContents(request.getContents());

@@ -21,9 +21,9 @@ public class CommentController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PatchMapping
-    public ResponseEntity<Void> commentModify(@RequestBody ModifyCommentRequest request) {
-        commentService.modifyComment(request);
+    @PatchMapping("/{commentId}")
+    public ResponseEntity<Void> commentModify(@PathVariable Long commentId, @RequestBody ModifyCommentRequest request) {
+        commentService.modifyComment(commentId, request);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
