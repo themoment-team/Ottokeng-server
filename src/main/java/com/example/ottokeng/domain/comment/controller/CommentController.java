@@ -15,9 +15,9 @@ public class CommentController {
 
     private final CommentService commentService;
 
-    @PostMapping
-    public ResponseEntity<Void> commentAdd(@RequestBody AddCommentRequest request) {
-        commentService.addComment(request);
+    @PostMapping("/{postId}")
+    public ResponseEntity<Void> commentAdd(@PathVariable Long postId, @RequestBody AddCommentRequest request) {
+        commentService.addComment(postId, request);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

@@ -24,9 +24,9 @@ public class CommentService {
     private final PostRepository postRepository;
 
     @Transactional
-    public void addComment(AddCommentRequest request) {
+    public void addComment(Long postId, AddCommentRequest request) {
         User currentUser = currentUserUtil.getCurrentUser();
-        Post post = postRepository.findById(request.getPostId())
+        Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new CustomException(ErrorCode.POST_NOT_FOUND));
 
         Comment comment = Comment.builder()
