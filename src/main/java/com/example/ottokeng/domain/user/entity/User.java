@@ -1,6 +1,7 @@
 package com.example.ottokeng.domain.user.entity;
 
 
+import com.example.ottokeng.domain.comment.entity.Comment;
 import com.example.ottokeng.domain.post.entity.Post;
 import com.example.ottokeng.global.enumType.Role;
 import lombok.AllArgsConstructor;
@@ -34,6 +35,9 @@ public class User {
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
     private List<Post> posts = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
+    private List<Comment> comments = new ArrayList<>();
 
     public User update(String name, String imageUrl) {
         this.name = name;
