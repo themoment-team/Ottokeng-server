@@ -15,7 +15,11 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static com.example.ottokeng.global.exception.ErrorCode.ALREADY_BLACKLIST;
@@ -64,5 +68,25 @@ public class UserService {
                 .stream()
                 .map((post) -> new ShowPostResponse(post, currentUser.getName()))
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<ShowPostResponse> findMyComments() {
+        User currentUser = currentUserUtil.getCurrentUser();
+
+        List<ShowPostResponse> collect = currentUser.getComments()
+                .stream()
+                .map((comment) -> new ShowPostResponse(comment.getPost(),comment.getPost().getUser().getName()))
+                .collect(Collectors.toList());
+
+        return collect.stream()
+                .filter(distinctByKey(ShowPostResponse::getId))
+                .collect(Collectors.toList());
+    }
+
+    public static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor)
+    {
+        Map<Object, Boolean> map = new ConcurrentHashMap<>();
+        return t -> map.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
     }
 }

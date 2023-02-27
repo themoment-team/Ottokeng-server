@@ -1,5 +1,6 @@
 package com.example.ottokeng.domain.user.controller;
 
+import com.example.ottokeng.domain.comment.dto.CommentResponse;
 import com.example.ottokeng.domain.post.presentation.dto.response.ShowPostResponse;
 import com.example.ottokeng.domain.user.service.UserService;
 import com.example.ottokeng.global.security.jwt.JwtTokenProvider;
@@ -37,6 +38,12 @@ public class UserController {
     public ResponseEntity<List<ShowPostResponse>> myPostList() {
         List<ShowPostResponse> myPosts = userService.findMyPosts();
         return new ResponseEntity<>(myPosts, HttpStatus.OK);
+    }
+
+    @GetMapping("/comment")
+    public ResponseEntity<List<ShowPostResponse>> myCommentList() {
+        List<ShowPostResponse> postResponses = userService.findMyComments();
+        return new ResponseEntity<>(postResponses, HttpStatus.OK);
     }
 
 }
