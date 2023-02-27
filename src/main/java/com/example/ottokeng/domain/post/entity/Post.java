@@ -1,19 +1,23 @@
 package com.example.ottokeng.domain.post.entity;
 
+import com.example.ottokeng.domain.comment.entity.Comment;
 import com.example.ottokeng.domain.user.entity.User;
+import com.example.ottokeng.global.entity.BaseTimeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Builder
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Post {
+public class Post extends BaseTimeEntity {
     @Id
     @GeneratedValue
     private Long id;
@@ -21,8 +25,6 @@ public class Post {
     private String title;
 
     private String contents;
-
-    private String date;
 
     @Enumerated(EnumType.STRING)
     private Get acquire;
@@ -36,10 +38,17 @@ public class Post {
     @Enumerated(EnumType.STRING)
     private Type type;
 
-    public void update(String title, String contents, String date, Get acquire, String image, String address, String communication, Type type){
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "post")
+    private List<Comment> comments = new ArrayList<>();
+
+
+    public void update(String title, String contents, Get acquire, String image, String address, String communication, Type type){
         this.title = title;
         this.contents = contents;
-        this.date = date;
         this.acquire = acquire;
         this.image = image;
         this.address = address;
@@ -47,7 +56,4 @@ public class Post {
         this.type = type;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "user")
-    private User user;
 }

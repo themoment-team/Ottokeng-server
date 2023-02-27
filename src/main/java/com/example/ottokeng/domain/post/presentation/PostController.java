@@ -16,7 +16,7 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping("/writing")
-    public ResponseEntity<AllPostsResponse> showlost(){
+    public ResponseEntity<AllPostsResponse> getAllPost(){
         AllPostsResponse allPost = postService.getAllPost();
         return new ResponseEntity<>(allPost, HttpStatus.OK);
     }

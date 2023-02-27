@@ -12,6 +12,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.TimeUnit;
 
 import static com.example.ottokeng.global.exception.ErrorCode.ALREADY_BLACKLIST;
@@ -28,7 +29,8 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
-    public void logout(String accessToken){
+    public void logout(HttpServletRequest request){
+        String accessToken = jwtTokenProvider.resolveToken(request);
         User currentUser = currentUserUtil.getCurrentUser();
         RefreshToken refreshToken = refreshTokenRepository.findById(currentUser.getOauthId())
                 .orElseThrow(() -> new CustomException(UNABLE_TO_ISSUANCE_REFRESHTOKEN));

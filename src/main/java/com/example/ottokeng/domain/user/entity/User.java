@@ -1,6 +1,7 @@
 package com.example.ottokeng.domain.user.entity;
 
 
+import com.example.ottokeng.domain.comment.entity.Comment;
 import com.example.ottokeng.domain.post.entity.Post;
 import com.example.ottokeng.global.enumType.Role;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -32,7 +34,10 @@ public class User {
     private Role role;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
-    private List<Post> posts;
+    private List<Post> posts = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
+    private List<Comment> comments = new ArrayList<>();
 
     public User update(String name, String imageUrl) {
         this.name = name;

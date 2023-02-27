@@ -18,11 +18,10 @@ import javax.servlet.http.HttpServletRequest;
 public class UserController {
 
     private final UserService userService;
-    private final JwtTokenProvider jwtTokenProvider;
 
     @DeleteMapping("/logout")
     public ResponseEntity<Void> logout(HttpServletRequest request) {
-        userService.logout(jwtTokenProvider.resolveToken(request));
+        userService.logout(request);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
