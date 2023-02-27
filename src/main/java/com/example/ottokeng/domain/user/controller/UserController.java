@@ -1,5 +1,6 @@
 package com.example.ottokeng.domain.user.controller;
 
+import com.example.ottokeng.domain.post.presentation.dto.response.ShowPostResponse;
 import com.example.ottokeng.domain.user.service.UserService;
 import com.example.ottokeng.global.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,6 +31,12 @@ public class UserController {
     public ResponseEntity<Void> delete() {
         userService.delete();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/post")
+    public ResponseEntity<List<ShowPostResponse>> myPostList() {
+        List<ShowPostResponse> myPosts = userService.findMyPosts();
+        return new ResponseEntity<>(myPosts, HttpStatus.OK);
     }
 
 }
