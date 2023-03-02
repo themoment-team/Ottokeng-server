@@ -48,7 +48,6 @@ public class PostServiceImpl implements PostService {
         Post post = Post.builder()
                 .title(request.getTitle())
                 .contents(request.getContents())
-                .image(request.getImage())
                 .acquire(request.getAcquire())
                 .address(request.getAddress())
                 .communication(request.getCommunication())
@@ -71,7 +70,6 @@ public class PostServiceImpl implements PostService {
                 request.getTitle(),
                 request.getContents(),
                 request.getAcquire(),
-                request.getImage(),
                 request.getAddress(),
                 request.getCommunication(),
                 request.getType());

@@ -13,7 +13,6 @@ public class PostWritingRequest {
     private String title;
     private String contents;
     private Get acquire;
-    private String image;
     private String address;
     private String communication;
     private Type type;

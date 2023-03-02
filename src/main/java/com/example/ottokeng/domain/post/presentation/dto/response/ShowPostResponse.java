@@ -16,7 +16,6 @@ public class ShowPostResponse {
     private String contents;
     private String writer;
     private Get acquire;
-    private String image;
     private String address;
     private String communication;
     private Type type;
@@ -28,7 +27,6 @@ public class ShowPostResponse {
         this.contents = post.getContents();
         this.writer = name;
         this.acquire = post.getAcquire();
-        this.image = post.getImage();
         this.address = post.getAddress();
         this.communication = post.getCommunication();
         this.type = post.getType();
