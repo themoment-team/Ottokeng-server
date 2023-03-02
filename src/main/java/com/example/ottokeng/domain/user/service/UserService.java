@@ -2,6 +2,7 @@ package com.example.ottokeng.domain.user.service;
 
 import com.example.ottokeng.domain.oauth.entity.RefreshToken;
 import com.example.ottokeng.domain.oauth.repository.RefreshTokenRepository;
+import com.example.ottokeng.domain.post.presentation.dto.response.ShowPostResponse;
 import com.example.ottokeng.domain.user.entity.User;
 import com.example.ottokeng.domain.user.repository.UserRepository;
 import com.example.ottokeng.global.exception.CustomException;
@@ -10,10 +11,16 @@ import com.example.ottokeng.global.util.CurrentUserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import static com.example.ottokeng.global.exception.ErrorCode.ALREADY_BLACKLIST;
 import static com.example.ottokeng.global.exception.ErrorCode.UNABLE_TO_ISSUANCE_REFRESHTOKEN;
@@ -51,5 +58,35 @@ public class UserService {
     public void delete() {
         User user = currentUserUtil.getCurrentUser();
         userRepository.delete(user);
+    }
+
+    @Transactional
+    public List<ShowPostResponse> findMyPosts() {
+        User currentUser = currentUserUtil.getCurrentUser();
+
+        return currentUser.getPosts()
+                .stream()
+                .map((post) -> new ShowPostResponse(post, currentUser.getName()))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<ShowPostResponse> findMyComments() {
+        User currentUser = currentUserUtil.getCurrentUser();
+
+        List<ShowPostResponse> collect = currentUser.getComments()
+                .stream()
+                .map((comment) -> new ShowPostResponse(comment.getPost(),comment.getPost().getUser().getName()))
+                .collect(Collectors.toList());
+
+        return collect.stream()
+                .filter(distinctByKey(ShowPostResponse::getId))
+                .collect(Collectors.toList());
+    }
+
+    public static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor)
+    {
+        Map<Object, Boolean> map = new ConcurrentHashMap<>();
+        return t -> map.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
     }
 }
