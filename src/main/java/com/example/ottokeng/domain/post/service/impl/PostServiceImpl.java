@@ -1,10 +1,12 @@
 package com.example.ottokeng.domain.post.service.impl;
 
+import com.example.ottokeng.domain.post.entity.Image;
 import com.example.ottokeng.domain.post.entity.Post;
 import com.example.ottokeng.domain.post.presentation.dto.request.PostWritingRequest;
 import com.example.ottokeng.domain.post.presentation.dto.request.ModifyPostWritingRequest;
 import com.example.ottokeng.domain.post.presentation.dto.response.AllPostsResponse;
 import com.example.ottokeng.domain.post.presentation.dto.response.ShowPostResponse;
+import com.example.ottokeng.domain.post.repository.ImageRepository;
 import com.example.ottokeng.domain.post.repository.PostRepository;
 import com.example.ottokeng.domain.post.service.PostService;
 import com.example.ottokeng.domain.user.entity.User;
@@ -16,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,6 +31,7 @@ public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;
+    private final ImageRepository imageRepository;
 
     @Override
     public AllPostsResponse getAllPost() {
@@ -43,7 +47,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void postWritingExecute(PostWritingRequest request) {
+    public void postWritingExecute(PostWritingRequest request, List<String> imgPaths) {
+        if(imgPaths == null || imgPaths.isEmpty()){
+            throw new CustomException(ErrorCode.WRONG_INPUT_IMAGE);
+        }
+
         User user = userUtil.getCurrentUser();
         Post post = Post.builder()
                 .title(request.getTitle())
@@ -55,9 +63,15 @@ public class PostServiceImpl implements PostService {
                 .user(user)
                 .build();
 
-        user.getPosts().add(post);
-
         postRepository.save(post);
+
+        for (String imageUrl : imgPaths) {
+            Image image = Image.builder()
+                    .imageUrl(imageUrl)
+                    .post(post)
+                    .build();
+            imageRepository.save(image);
+        }
     }
 
     @Override

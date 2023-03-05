@@ -43,7 +43,7 @@ public class Post extends BaseTimeEntity {
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "post")
     private List<Comment> comments = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.REMOVE)
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "post")
     private List<Image> images = new ArrayList<>();
 
     public void update(String title, String contents, Get acquire, String address, String communication, Type type){

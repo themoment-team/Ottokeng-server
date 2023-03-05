@@ -4,10 +4,12 @@ import com.example.ottokeng.domain.post.presentation.dto.request.PostWritingRequ
 import com.example.ottokeng.domain.post.presentation.dto.request.ModifyPostWritingRequest;
 import com.example.ottokeng.domain.post.presentation.dto.response.AllPostsResponse;
 
+import java.util.List;
+
 public interface PostService {
     AllPostsResponse getAllPost();
 
-    void postWritingExecute(PostWritingRequest request);
+    void postWritingExecute(PostWritingRequest request, List<String> imgPaths);
 
     void patchWritingExecutte(Long id, ModifyPostWritingRequest request);
 
