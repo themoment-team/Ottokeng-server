@@ -21,6 +21,12 @@ public class PostController {
         return new ResponseEntity<>(allPost, HttpStatus.OK);
     }
 
+    @GetMapping("/recentPosts")
+    public ResponseEntity<RecentPostsResponse> getRecentPosts(){
+        RecentPostsResponse recentPosts = postService.getRecentPosts();
+        return new ResponseEntity<>(recentPosts, HttpStatus.OK);
+    }
+
     @PostMapping("/writing")
     public ResponseEntity<Void> postWriting(@RequestBody PostWritingRequest request){
         postService.postWritingExecute(request);
