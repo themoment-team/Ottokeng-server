@@ -32,10 +32,9 @@ public class SecurityConfig{
                 .antMatchers("/login/oauth/**").permitAll()
                 .antMatchers("/token/reissue").permitAll()
                 .antMatchers(HttpMethod.GET, "/post/comment/**").permitAll()
-                .antMatchers( "/post/writing").permitAll()
+                .antMatchers( HttpMethod.GET,"/post/writing").permitAll()
                 .antMatchers("/my-page/**").hasAuthority("ROLE_USER")
-                .antMatchers("/").permitAll()
-                .antMatchers("/post/test").permitAll();
+                .antMatchers("/").permitAll();
 
         http.authorizeRequests()
                 .anyRequest().authenticated();
