@@ -98,6 +98,6 @@ public class PostServiceImpl implements PostService {
     @Override
     public void deleteImage(String imageUrl) {
         s3Service.deleteS3(imageUrl);
-        imageRepository.deleteByImageUrl(String imageUrl);
+        imageRepository.deleteByImageUrl(imageUrl);
     }
 }
