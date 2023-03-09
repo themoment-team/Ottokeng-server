@@ -14,4 +14,6 @@ public interface PostService {
     void patchWritingExecutte(Long id, ModifyPostWritingRequest request);
 
     void deleteWritingExecute(Long id);
+
+    void deleteImage(String imageUrl);
 }

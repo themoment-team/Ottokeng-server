@@ -32,6 +32,7 @@ public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
     private final ImageRepository imageRepository;
+    private final S3Service s3Service;
 
     @Override
     public AllPostsResponse getAllPost() {
@@ -92,5 +93,11 @@ public class PostServiceImpl implements PostService {
     @Override
     public void deleteWritingExecute(Long id) {
         postRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteImage(String imageUrl) {
+        s3Service.deleteS3(imageUrl);
+        imageRepository.deleteByImageUrl(String imageUrl);
     }
 }
