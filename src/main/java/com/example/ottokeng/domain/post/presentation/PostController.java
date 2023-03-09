@@ -24,27 +24,33 @@ public class PostController {
     private final S3Service s3Service;
 
     @GetMapping("/writing")
-    public ResponseEntity<AllPostsResponse> getAllPost(){
+    public ResponseEntity<AllPostsResponse> getAllPost() {
         AllPostsResponse allPost = postService.getAllPost();
         return new ResponseEntity<>(allPost, HttpStatus.OK);
     }
 
     @PostMapping("/writing")
-    public ResponseEntity<Void> postWriting(@RequestPart("content") PostWritingRequest request, @RequestPart(value = "file", required = false) List<MultipartFile> multipartFiles){
+    public ResponseEntity<Void> postWriting(@RequestPart("content") PostWritingRequest request, @RequestPart(value = "file", required = false) List<MultipartFile> multipartFiles) {
         List<String> imgPaths = s3Service.upload(multipartFiles);
         postService.postWritingExecute(request, imgPaths);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PatchMapping("/writing/{id}")
-    public ResponseEntity<Void> patchWriting(@PathVariable Long id, @RequestBody ModifyPostWritingRequest request){
+    public ResponseEntity<Void> patchWriting(@PathVariable Long id, @RequestBody ModifyPostWritingRequest request) {
         postService.patchWritingExecutte(id, request);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/writing")
-    public ResponseEntity<Void> deleteWriting(@RequestParam Long id){
+    public ResponseEntity<Void> deleteWriting(@RequestParam Long id) {
         postService.deleteWritingExecute(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping("/writing/image/{imageUrl}")
+    public ResponseEntity<Void> deleteImage(@PathVariable String imageUrl) {
+        postService.deleteImage(imageUrl);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
