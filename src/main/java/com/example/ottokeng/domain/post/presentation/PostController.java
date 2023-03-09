@@ -1,5 +1,6 @@
 package com.example.ottokeng.domain.post.presentation;
 
+import com.example.ottokeng.domain.post.entity.Post;
 import com.example.ottokeng.domain.post.presentation.dto.request.PostWritingRequest;
 import com.example.ottokeng.domain.post.presentation.dto.request.ModifyPostWritingRequest;
 import com.example.ottokeng.domain.post.presentation.dto.response.AllPostsResponse;
@@ -9,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,8 +26,8 @@ public class PostController {
     }
 
     @GetMapping("/recentPosts")
-    public ResponseEntity<RecentPostsResponse> getRecentPosts(){
-        RecentPostsResponse recentPosts = postService.getRecentPosts();
+    public ResponseEntity<List<Post>> getRecentPosts(){
+        List<Post> recentPosts = postService.getRecentPosts();
         return new ResponseEntity<>(recentPosts, HttpStatus.OK);
     }
 
@@ -41,7 +44,7 @@ public class PostController {
     }
 
     @DeleteMapping("/writing")
-    public ResponseEntity<Void> deleteWriting(@RequestParam Long id){
+    public ResponseEntity<Void> deleteWriting(@RequestParam Long id) {
         postService.deleteWritingExecute(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

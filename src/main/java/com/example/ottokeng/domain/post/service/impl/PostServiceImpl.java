@@ -7,6 +7,7 @@ import com.example.ottokeng.domain.post.presentation.dto.response.AllPostsRespon
 import com.example.ottokeng.domain.post.presentation.dto.response.ShowPostResponse;
 import com.example.ottokeng.domain.post.repository.PostRepository;
 import com.example.ottokeng.domain.post.service.PostService;
+import com.example.ottokeng.domain.post.utils.PostUtil;
 import com.example.ottokeng.domain.user.entity.User;
 import com.example.ottokeng.domain.user.repository.UserRepository;
 import com.example.ottokeng.global.exception.CustomException;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
 public class PostServiceImpl implements PostService {
 
     private final CurrentUserUtil userUtil;
+    private final PostUtil postUtil;
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;
@@ -40,6 +42,11 @@ public class PostServiceImpl implements PostService {
         return AllPostsResponse.builder()
                 .list(showPostResponses)
                 .build();
+    }
+
+    @Override
+    public List<Post> getRecentPosts() {
+        return postRepository.findTop24ByOrderByRegisterDateDesc();
     }
 
     @Override
