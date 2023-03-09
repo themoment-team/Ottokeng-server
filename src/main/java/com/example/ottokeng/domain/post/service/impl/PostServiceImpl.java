@@ -98,4 +98,9 @@ public class PostServiceImpl implements PostService {
         s3Service.deleteS3(imageUrl);
         imageRepository.deleteByImageUrl(imageUrl);
     }
+
+    @Override
+    public List<ShowPostResponse> search(String keyword) {
+        return postRepository.findByTitleContaining(keyword);
+    }
 }
