@@ -12,7 +12,7 @@ public interface PostService {
 
     void postWritingExecute(PostWritingRequest request, List<String> imgPaths);
 
-    void patchWritingExecutte(Long id, ModifyPostWritingRequest request);
+    void patchWritingExecutte(Long id, ModifyPostWritingRequest request, List<String> imgPaths);
 
     void deleteWritingExecute(Long id);
 

@@ -38,8 +38,9 @@ public class PostController {
     }
 
     @PatchMapping("/writing/{id}")
-    public ResponseEntity<Void> patchWriting(@PathVariable Long id, @RequestBody ModifyPostWritingRequest request) {
-        postService.patchWritingExecutte(id, request);
+    public ResponseEntity<Void> patchWriting(@PathVariable Long id, @RequestPart("content") ModifyPostWritingRequest request, @RequestPart(value = "file", required = false) List<MultipartFile> multipartFiles) {
+        List<String> imgPaths = s3Service.upload(multipartFiles);
+        postService.patchWritingExecutte(id, request, imgPaths);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

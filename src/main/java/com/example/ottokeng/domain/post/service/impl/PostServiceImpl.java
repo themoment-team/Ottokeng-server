@@ -75,7 +75,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void patchWritingExecutte(Long id, ModifyPostWritingRequest request) {
+    public void patchWritingExecutte(Long id, ModifyPostWritingRequest request, List<String> imgPaths) {
         Post post = postRepository
                 .findById(id).orElseThrow(()->
                         new CustomException(ErrorCode.POST_NOT_FOUND));
@@ -86,6 +86,14 @@ public class PostServiceImpl implements PostService {
                 request.getAcquire(),
                 request.getAddress(),
                 request.getType());
+
+        for (String imageUrl : imgPaths) {
+            Image image = Image.builder()
+                    .imageUrl(imageUrl)
+                    .post(post)
+                    .build();
+            imageRepository.save(image);
+        }
     }
 
     @Override
