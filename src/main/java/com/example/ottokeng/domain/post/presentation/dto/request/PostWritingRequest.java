@@ -14,6 +14,5 @@ public class PostWritingRequest {
     private String contents;
     private Get acquire;
     private String address;
-    private String communication;
     private Type type;
 }

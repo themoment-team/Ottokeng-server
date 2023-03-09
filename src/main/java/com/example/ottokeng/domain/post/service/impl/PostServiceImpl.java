@@ -59,7 +59,6 @@ public class PostServiceImpl implements PostService {
                 .contents(request.getContents())
                 .acquire(request.getAcquire())
                 .address(request.getAddress())
-                .communication(request.getCommunication())
                 .type(request.getType())
                 .user(user)
                 .build();
@@ -86,7 +85,6 @@ public class PostServiceImpl implements PostService {
                 request.getContents(),
                 request.getAcquire(),
                 request.getAddress(),
-                request.getCommunication(),
                 request.getType());
     }
 
