@@ -56,8 +56,8 @@ public class PostController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/writing/search")
-    public ResponseEntity<List<ShowPostResponse>> searchPost(@RequestParam String keyword) {
+    @GetMapping("/writing/search/{keyword}")
+    public ResponseEntity<List<ShowPostResponse>> searchPost(@PathVariable String keyword) {
         List<ShowPostResponse> responses = postService.search(keyword);
         return new ResponseEntity<>(responses, HttpStatus.OK);
     }
