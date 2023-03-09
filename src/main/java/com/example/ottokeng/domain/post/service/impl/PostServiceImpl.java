@@ -46,7 +46,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<Post> getRecentPosts() {
-        return postRepository.findTop24ByOrderByRegisterDateDesc();
+        return postRepository.findTop24ByOrderByIdDesc();
     }
 
     @Override
