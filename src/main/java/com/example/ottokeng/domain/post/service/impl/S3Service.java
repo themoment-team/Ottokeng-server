@@ -6,6 +6,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.example.ottokeng.global.exception.CustomException;
@@ -89,5 +90,9 @@ public class S3Service {
             throw new CustomException(ErrorCode.WRONG_INPUT_IMAGE);
         }
         return fileName.substring(fileName.lastIndexOf("."));
+    }
+
+    public void deleteS3(String fileName){
+        s3Client.deleteObject(new DeleteObjectRequest(bucket, fileName));
     }
 }
