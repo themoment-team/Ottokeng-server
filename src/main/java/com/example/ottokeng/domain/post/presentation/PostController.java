@@ -4,7 +4,7 @@ import com.example.ottokeng.domain.post.entity.Post;
 import com.example.ottokeng.domain.post.presentation.dto.request.PostWritingRequest;
 import com.example.ottokeng.domain.post.presentation.dto.request.ModifyPostWritingRequest;
 import com.example.ottokeng.domain.post.presentation.dto.response.AllPostsResponse;
-import com.example.ottokeng.domain.post.presentation.dto.response.RecentPostsResponse;
+import com.example.ottokeng.domain.post.presentation.dto.response.RecentPostResponse;
 import com.example.ottokeng.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,8 +26,8 @@ public class PostController {
     }
 
     @GetMapping("/recentPosts")
-    public ResponseEntity<List<Post>> getRecentPosts(){
-        List<Post> recentPosts = postService.getRecentPosts();
+    public ResponseEntity<List<RecentPostResponse>> getRecentPosts(){
+        List<RecentPostResponse> recentPosts = postService.getRecentPosts();
         return new ResponseEntity<>(recentPosts, HttpStatus.OK);
     }
 

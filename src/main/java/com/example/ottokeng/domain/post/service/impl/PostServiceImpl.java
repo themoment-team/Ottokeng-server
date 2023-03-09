@@ -4,6 +4,7 @@ import com.example.ottokeng.domain.post.entity.Post;
 import com.example.ottokeng.domain.post.presentation.dto.request.PostWritingRequest;
 import com.example.ottokeng.domain.post.presentation.dto.request.ModifyPostWritingRequest;
 import com.example.ottokeng.domain.post.presentation.dto.response.AllPostsResponse;
+import com.example.ottokeng.domain.post.presentation.dto.response.RecentPostResponse;
 import com.example.ottokeng.domain.post.presentation.dto.response.ShowPostResponse;
 import com.example.ottokeng.domain.post.repository.PostRepository;
 import com.example.ottokeng.domain.post.service.PostService;
@@ -45,8 +46,15 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> getRecentPosts() {
-        return postRepository.findTop24ByOrderByIdDesc();
+    public List<RecentPostResponse> getRecentPosts() {
+        List<Post> posts = postRepository.findTop24ByOrderByIdDesc();
+        return posts.stream()
+                .map(post -> new RecentPostResponse(
+                        post.getId(),
+                        post.getTitle(),
+                        post.getImage(),
+                        post.getCreatedAt()
+                )).collect(Collectors.toList());
     }
 
     @Override
