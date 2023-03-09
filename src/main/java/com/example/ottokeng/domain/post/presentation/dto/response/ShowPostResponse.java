@@ -25,11 +25,11 @@ public class ShowPostResponse {
     private LocalDateTime createdAt;
     private List<String> imageUrls = new ArrayList<>();
 
-    public ShowPostResponse(Post post, String name){
+    public ShowPostResponse(Post post){
         this.id = post.getId();
         this.title = post.getTitle();
         this.contents = post.getContents();
-        this.writer = name;
+        this.writer = post.getUser().getName();
         this.acquire = post.getAcquire();
         this.address = post.getAddress();
         this.type = post.getType();

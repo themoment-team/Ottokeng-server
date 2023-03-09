@@ -40,7 +40,7 @@ public class PostServiceImpl implements PostService {
 
         List<ShowPostResponse> showPostResponses = postRepository.findAll()
                 .stream()
-                .map(post -> new ShowPostResponse(post,user.getName()))
+                .map(ShowPostResponse::new)
                 .collect(Collectors.toList());
         return AllPostsResponse.builder()
                 .list(showPostResponses)
@@ -101,6 +101,8 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<ShowPostResponse> search(String keyword) {
-        return postRepository.findByTitleContaining(keyword);
+        return postRepository.findByTitleContaining(keyword).stream()
+                .map(ShowPostResponse::new)
+                .collect(Collectors.toList());
     }
 }
