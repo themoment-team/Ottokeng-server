@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
 
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -23,7 +24,7 @@ public class SecurityConfig{
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
-                .cors().and()
+                .cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()).and()
                 .csrf().disable()
                 .httpBasic().disable();
 
@@ -31,8 +32,9 @@ public class SecurityConfig{
                 .antMatchers("/login/oauth/**").permitAll()
                 .antMatchers("/token/reissue").permitAll()
                 .antMatchers(HttpMethod.GET, "/post/comment/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/post/writing").permitAll()
-                .antMatchers("/my-page/**").hasAuthority("ROLE_USER");
+                .antMatchers( HttpMethod.GET,"/post/writing").permitAll()
+                .antMatchers("/my-page/**").hasAuthority("ROLE_USER")
+                .antMatchers("/").permitAll();
 
         http.authorizeRequests()
                 .anyRequest().authenticated();

@@ -40,3 +40,4 @@ out/
 
 ### For Secret ###
 application-oauth.yml
+application-aws.yml

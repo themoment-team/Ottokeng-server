@@ -66,7 +66,7 @@ public class UserService {
 
         return currentUser.getPosts()
                 .stream()
-                .map((post) -> new ShowPostResponse(post, currentUser.getName()))
+                .map(ShowPostResponse::new)
                 .collect(Collectors.toList());
     }
 
@@ -76,7 +76,7 @@ public class UserService {
 
         List<ShowPostResponse> collect = currentUser.getComments()
                 .stream()
-                .map((comment) -> new ShowPostResponse(comment.getPost(),comment.getPost().getUser().getName()))
+                .map((comment) -> new ShowPostResponse(comment.getPost()))
                 .collect(Collectors.toList());
 
         return collect.stream()
