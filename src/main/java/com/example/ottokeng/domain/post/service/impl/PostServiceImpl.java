@@ -5,6 +5,7 @@ import com.example.ottokeng.domain.post.entity.Post;
 import com.example.ottokeng.domain.post.presentation.dto.request.PostWritingRequest;
 import com.example.ottokeng.domain.post.presentation.dto.request.ModifyPostWritingRequest;
 import com.example.ottokeng.domain.post.presentation.dto.response.AllPostsResponse;
+import com.example.ottokeng.domain.post.presentation.dto.response.RecentPostResponse;
 import com.example.ottokeng.domain.post.presentation.dto.response.ShowPostResponse;
 import com.example.ottokeng.domain.post.repository.ImageRepository;
 import com.example.ottokeng.domain.post.repository.PostRepository;
@@ -112,5 +113,18 @@ public class PostServiceImpl implements PostService {
         return postRepository.findByTitleContaining(keyword).stream()
                 .map(ShowPostResponse::new)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<RecentPostResponse> recentPost() {
+        List<Post> posts = postRepository.findFirst24ByOrderById();
+        return posts.stream()
+                .map(post -> new RecentPostResponse(
+                        post.getUser().getName(),
+                        post.getTitle(),
+                        post.getImages(),
+                        post.getAddress(),
+                        post.getCreatedAt()
+                )).collect(Collectors.toList());
     }
 }
