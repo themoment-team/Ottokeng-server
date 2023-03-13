@@ -16,7 +16,5 @@ public interface PostService {
 
     void deleteWritingExecute(Long id);
 
-    void deleteImage(String imageUrl);
-
     List<ShowPostResponse> search(String keyword);
 }

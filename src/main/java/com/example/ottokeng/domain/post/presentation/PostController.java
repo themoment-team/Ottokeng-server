@@ -50,12 +50,6 @@ public class PostController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping("/writing/image/{imageUrl}")
-    public ResponseEntity<Void> deleteImage(@PathVariable String imageUrl) {
-        postService.deleteImage(imageUrl);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
     @GetMapping("/writing/search/{keyword}")
     public ResponseEntity<List<ShowPostResponse>> searchPost(@PathVariable String keyword) {
         List<ShowPostResponse> responses = postService.search(keyword);
