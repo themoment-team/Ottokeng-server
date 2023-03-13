@@ -31,7 +31,7 @@ public class PostController {
     }
 
     @PostMapping("/writing")
-    public ResponseEntity<Void> postWriting(@RequestPart("content") PostWritingRequest request, @RequestPart(value = "file", required = false) List<MultipartFile> multipartFiles) {
+    public ResponseEntity<Void> postWriting(@RequestPart("content") PostWritingRequest request, @RequestPart(value = "file") List<MultipartFile> multipartFiles) {
         List<String> imgPaths = s3Service.upload(multipartFiles);
         postService.postWritingExecute(request, imgPaths);
         return new ResponseEntity<>(HttpStatus.CREATED);
