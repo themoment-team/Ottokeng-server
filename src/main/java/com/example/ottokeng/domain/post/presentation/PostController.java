@@ -30,6 +30,12 @@ public class PostController {
         return new ResponseEntity<>(allPost, HttpStatus.OK);
     }
 
+    @GetMapping("/recentPost")
+    public ResponseEntity<List<RecentPostResponse>> recentPost(){
+        List<RecentPostResponse> recentPost = postService.recentPost();
+        return new ResponseEntity<>(recentPost, HttpStatus.OK);
+    }
+
     @PostMapping("/writing")
     public ResponseEntity<Void> postWriting(@RequestPart("content") PostWritingRequest request, @RequestPart(value = "file", required = false) List<MultipartFile> multipartFiles) {
         List<String> imgPaths = s3Service.upload(multipartFiles);
