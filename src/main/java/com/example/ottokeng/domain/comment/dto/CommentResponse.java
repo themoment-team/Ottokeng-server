@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Getter
 @NoArgsConstructor
@@ -16,13 +17,15 @@ public class CommentResponse {
     private String writer;
     private String profileImg;
     private String contents;
+    private Boolean isMine;
     private LocalDateTime createdAt;
 
-    public CommentResponse(Comment comment) {
+    public CommentResponse(Comment comment, String writerOauthId, String checkOauthId) {
         this.commentId = comment.getId();
         this.writer = comment.getUser().getName();
         this.profileImg = comment.getUser().getImageUrl();
         this.contents = comment.getContents();
         this.createdAt = comment.getCreatedAt();
+        this.isMine = Objects.equals(writerOauthId, checkOauthId);
     }
 }

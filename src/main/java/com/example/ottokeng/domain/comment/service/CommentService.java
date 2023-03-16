@@ -59,12 +59,13 @@ public class CommentService {
 
     @Transactional
     public List<CommentResponse> findCommentList(Long postId) {
+        User user = currentUserUtil.getCurrentUser();
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new CustomException(ErrorCode.POST_NOT_FOUND));
 
         return post.getComments()
                 .stream()
-                .map(CommentResponse::new)
+                .map((comment) -> new CommentResponse(comment, comment.getUser().getOauthId(), user.getOauthId()))
                 .collect(Collectors.toList());
     }
 }
