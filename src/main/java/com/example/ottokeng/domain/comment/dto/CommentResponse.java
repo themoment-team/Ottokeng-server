@@ -16,6 +16,7 @@ public class CommentResponse {
     private String writer;
     private String profileImg;
     private String contents;
+    private Boolean isMine;
     private LocalDateTime createdAt;
 
     public CommentResponse(Comment comment) {
