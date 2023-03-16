@@ -37,7 +37,7 @@ public class PostController {
     }
 
     @PostMapping("/writing")
-    public ResponseEntity<Void> postWriting(@RequestPart("content") PostWritingRequest request, @RequestPart(value = "file", required = false) List<MultipartFile> multipartFiles) {
+    public ResponseEntity<Void> postWriting(@RequestPart("content") PostWritingRequest request, @RequestPart(value = "file") List<MultipartFile> multipartFiles) {
         List<String> imgPaths = s3Service.upload(multipartFiles);
         postService.postWritingExecute(request, imgPaths);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -45,20 +45,13 @@ public class PostController {
 
     @PatchMapping("/writing/{id}")
     public ResponseEntity<Void> patchWriting(@PathVariable Long id, @RequestPart("content") ModifyPostWritingRequest request, @RequestPart(value = "file", required = false) List<MultipartFile> multipartFiles) {
-        List<String> imgPaths = s3Service.upload(multipartFiles);
-        postService.patchWritingExecutte(id, request, imgPaths);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        postService.patchWritingExecute(id, request, multipartFiles);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/writing")
     public ResponseEntity<Void> deleteWriting(@RequestParam Long id) {
         postService.deleteWritingExecute(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
-    @DeleteMapping("/writing/image/{imageUrl}")
-    public ResponseEntity<Void> deleteImage(@PathVariable String imageUrl) {
-        postService.deleteImage(imageUrl);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

@@ -19,7 +19,10 @@ import com.example.ottokeng.global.util.CurrentUserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -76,7 +79,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void patchWritingExecutte(Long id, ModifyPostWritingRequest request, List<String> imgPaths) {
+    public void patchWritingExecute(Long id, ModifyPostWritingRequest request, List<MultipartFile> multipartFiles) {
         Post post = postRepository
                 .findById(id).orElseThrow(()->
                         new CustomException(ErrorCode.POST_NOT_FOUND));
@@ -88,24 +91,32 @@ public class PostServiceImpl implements PostService {
                 request.getAddress(),
                 request.getType());
 
-        for (String imageUrl : imgPaths) {
-            Image image = Image.builder()
-                    .imageUrl(imageUrl)
-                    .post(post)
-                    .build();
-            imageRepository.save(image);
+        if(multipartFiles != null) {
+            imageRepository.deleteAllByIdInBatch(Collections.singleton(post.getId()));
+
+            List<String> imageUrls = post.getImages().stream()
+                    .map(Image::getImageUrl)
+                    .collect(Collectors.toList());
+
+            for (String imageUrl: imageUrls) {
+                s3Service.deleteS3(imageUrl);
+            }
+
+            List<String> imgPaths = s3Service.upload(multipartFiles);
+
+            for (String imageUrl : imgPaths) {
+                Image image = Image.builder()
+                        .imageUrl(imageUrl)
+                        .post(post)
+                        .build();
+                imageRepository.save(image);
+            }
         }
     }
 
     @Override
     public void deleteWritingExecute(Long id) {
         postRepository.deleteById(id);
-    }
-
-    @Override
-    public void deleteImage(String imageUrl) {
-        s3Service.deleteS3(imageUrl);
-        imageRepository.deleteByImageUrl(imageUrl);
     }
 
     @Override
