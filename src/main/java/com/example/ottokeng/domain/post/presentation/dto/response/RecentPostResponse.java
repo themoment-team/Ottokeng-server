@@ -13,9 +13,6 @@ public class RecentPostResponse {
     private String title;
     private String name;
     private String address;
-    private String imageUrl;
+    private String images;
     private LocalDateTime createdAt;
-
-    public RecentPostResponse(String name, String title, List<Image> imageUrl, String address, LocalDateTime createdAt) {
-    }
 }

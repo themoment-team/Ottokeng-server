@@ -6,6 +6,7 @@ import com.example.ottokeng.domain.post.presentation.dto.request.PostWritingRequ
 import com.example.ottokeng.domain.post.presentation.dto.request.ModifyPostWritingRequest;
 import com.example.ottokeng.domain.post.presentation.dto.response.AllPostsResponse;
 import com.example.ottokeng.domain.post.presentation.dto.response.RecentPostResponse;
+import com.example.ottokeng.domain.post.presentation.dto.response.RecentPostsResponse;
 import com.example.ottokeng.domain.post.presentation.dto.response.ShowPostResponse;
 import com.example.ottokeng.domain.post.repository.ImageRepository;
 import com.example.ottokeng.domain.post.repository.PostRepository;
@@ -19,7 +20,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -116,15 +116,18 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<RecentPostResponse> recentPost() {
-        List<Post> posts = postRepository.findFirst24ByOrderById();
-        return posts.stream()
+    public RecentPostsResponse recentPost() {
+        List<Post> recentposts = postRepository.findFirst24ByOrderById();
+        List<RecentPostResponse> recentPostsResponses = recentposts.stream()
                 .map(post -> new RecentPostResponse(
                         post.getUser().getName(),
                         post.getTitle(),
-                        post.getImages(),
                         post.getAddress(),
+                        post.getImages().get(0).getImageUrl(),
                         post.getCreatedAt()
                 )).collect(Collectors.toList());
+        return RecentPostsResponse.builder()
+                .recentPosts(recentPostsResponses)
+                .build();
     }
 }
