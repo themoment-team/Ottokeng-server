@@ -29,7 +29,9 @@ public class Post extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private Get acquire;
 
-    private String address;
+    private String lat;
+
+    private String lng;
 
     @Enumerated(EnumType.STRING)
     private Type type;
@@ -44,11 +46,12 @@ public class Post extends BaseTimeEntity {
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "post")
     private List<Image> images = new ArrayList<>();
 
-    public void update(String title, String contents, Get acquire, String address, Type type){
+    public void update(String title, String contents, Get acquire, String lat, String lng, Type type){
         this.title = title;
         this.contents = contents;
         this.acquire = acquire;
-        this.address = address;
+        this.lat = lat;
+        this.lng = lng;
         this.type = type;
     }
 

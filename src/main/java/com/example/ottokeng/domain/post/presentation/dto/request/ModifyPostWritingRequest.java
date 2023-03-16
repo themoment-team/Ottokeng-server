@@ -13,6 +13,7 @@ public class ModifyPostWritingRequest {
     private String title;
     private String contents;
     private Get acquire;
-    private String address;
+    private String lat;
+    private String lng;
     private Type type;
 }

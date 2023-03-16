@@ -20,7 +20,8 @@ public class ShowPostResponse {
     private String contents;
     private String writer;
     private Get acquire;
-    private String address;
+    private String lat;
+    private String lng;
     private Type type;
     private LocalDateTime createdAt;
     private List<String> imageUrls = new ArrayList<>();
@@ -31,7 +32,8 @@ public class ShowPostResponse {
         this.contents = post.getContents();
         this.writer = post.getUser().getName();
         this.acquire = post.getAcquire();
-        this.address = post.getAddress();
+        this.lat = post.getLat();
+        this.lng = post.getLng();
         this.type = post.getType();
         this.createdAt = post.getCreatedAt();
 
