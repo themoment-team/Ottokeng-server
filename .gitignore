@@ -4,6 +4,7 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+.DS_Store
 
 ### STS ###
 .apt_generated
@@ -16,6 +17,7 @@ build/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
+application.yml
 
 ### IntelliJ IDEA ###
 .idea
@@ -35,3 +37,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### For Secret ###
+application-oauth.yml
+application-aws.yml

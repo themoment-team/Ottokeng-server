@@ -1,0 +1,61 @@
+package com.example.ottokeng.global.security.jwt;
+
+import com.example.ottokeng.global.exception.CustomException;
+import com.example.ottokeng.global.exception.ErrorCode;
+import com.example.ottokeng.global.exception.ErrorResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import javax.servlet.FilterChain;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+import static com.example.ottokeng.global.exception.ErrorCode.*;
+
+
+@Slf4j
+@RequiredArgsConstructor
+@Component
+public class JwtExceptionFilter extends OncePerRequestFilter {
+
+    private final ObjectMapper objectMapper;
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException {
+        try {
+            chain.doFilter(req, res);
+        } catch (CustomException ex) {
+            log.error("============= 커스텀 에러 =============", ex);
+            setErrorResponse(ex.getErrorCode(), res);
+        } catch (ExpiredJwtException ex) {
+            log.error("============= 토큰의 유효기간이 만료 =============", ex);
+            setErrorResponse(EXPIRED_TOKEN, res);
+        } catch (JwtException ex) {
+            log.error("============= 유효하지 않은 토큰 =============", ex);
+            setErrorResponse(INVALID_TOKEN, res);
+        } catch (Exception ex) {
+            log.error("============= 알 수 없는 에러 발생 =============", ex);
+            setErrorResponse(UNKNOWN_ERROR, res);
+        }
+    }
+
+    private void setErrorResponse(ErrorCode errorCode, HttpServletResponse res) throws IOException {
+        res.setStatus(errorCode.getStatus());
+        res.setContentType("application/json");
+        res.setCharacterEncoding("UTF-8");
+
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .status(errorCode.getStatus())
+                .message(errorCode.getDetail())
+                .build();
+        String errorResponseEntityToJson = objectMapper.writeValueAsString(errorResponse);
+        res.getWriter().write(errorResponseEntityToJson.toString());
+    }
+
+}
