@@ -34,14 +34,11 @@ public class PostServiceImpl implements PostService {
     private final CurrentUserUtil userUtil;
 
     private final PostRepository postRepository;
-    private final UserRepository userRepository;
     private final ImageRepository imageRepository;
     private final S3Service s3Service;
 
     @Override
     public AllPostsResponse getAllPost() {
-        User user = userUtil.getCurrentUser();
-
         List<ShowPostResponse> showPostResponses = postRepository.findAll()
                 .stream()
                 .map(ShowPostResponse::new)
@@ -62,7 +59,8 @@ public class PostServiceImpl implements PostService {
                 .title(request.getTitle())
                 .contents(request.getContents())
                 .acquire(request.getAcquire())
-                .address(request.getAddress())
+                .lat(request.getLat())
+                .lng(request.getLng())
                 .type(request.getType())
                 .user(user)
                 .build();
@@ -88,7 +86,8 @@ public class PostServiceImpl implements PostService {
                 request.getTitle(),
                 request.getContents(),
                 request.getAcquire(),
-                request.getAddress(),
+                request.getLat(),
+                request.getLng(),
                 request.getType());
 
         if(multipartFiles != null) {
@@ -133,7 +132,6 @@ public class PostServiceImpl implements PostService {
                 .map(post -> new RecentPostResponse(
                         post.getUser().getName(),
                         post.getTitle(),
-                        post.getAddress(),
                         post.getImages().get(0).getImageUrl(),
                         post.getCreatedAt()
                 )).collect(Collectors.toList());

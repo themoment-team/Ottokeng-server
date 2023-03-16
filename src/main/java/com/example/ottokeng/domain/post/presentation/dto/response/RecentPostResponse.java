@@ -12,7 +12,6 @@ import java.util.List;
 public class RecentPostResponse {
     private String title;
     private String name;
-    private String address;
     private String images;
     private LocalDateTime createdAt;
 }
