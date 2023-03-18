@@ -124,8 +124,12 @@ public class PostServiceImpl implements PostService {
                         post.getImages().get(0).getImageUrl(),
                         post.getCreatedAt()
                 )).collect(Collectors.toList());
+        List<ShowPostResponse> recentPostPage = postRepository.findFirst24ByOrderById().stream()
+                .map(ShowPostResponse::new)
+                .collect(Collectors.toList());
         return RecentPostsResponse.builder()
                 .recentPosts(recentPostsResponses)
+                .recentPostPage(recentPostPage)
                 .build();
     }
 }

@@ -12,4 +12,5 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RecentPostsResponse {
     private final List<RecentPostResponse> recentPosts;
+    private final List<ShowPostResponse> recentPostPage;
 }
