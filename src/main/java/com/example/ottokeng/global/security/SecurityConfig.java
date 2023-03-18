@@ -24,7 +24,7 @@ public class SecurityConfig{
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
-                .cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()).and()
+                .cors().and()
                 .csrf().disable()
                 .httpBasic().disable();
 
