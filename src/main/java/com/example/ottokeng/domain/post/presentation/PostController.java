@@ -3,7 +3,7 @@ package com.example.ottokeng.domain.post.presentation;
 import com.example.ottokeng.domain.post.presentation.dto.request.PostWritingRequest;
 import com.example.ottokeng.domain.post.presentation.dto.request.ModifyPostWritingRequest;
 import com.example.ottokeng.domain.post.presentation.dto.response.AllPostsResponse;
-import com.example.ottokeng.domain.post.presentation.dto.response.RecentPostResponse;
+import com.example.ottokeng.domain.post.presentation.dto.response.RecentPostsResponse;
 import com.example.ottokeng.domain.post.presentation.dto.response.ShowPostResponse;
 import com.example.ottokeng.domain.post.service.PostService;
 import com.example.ottokeng.domain.post.service.impl.S3Service;
@@ -31,8 +31,8 @@ public class PostController {
     }
 
     @GetMapping("/recentPost")
-    public ResponseEntity<List<RecentPostResponse>> recentPost(){
-        List<RecentPostResponse> recentPost = postService.recentPost();
+    public ResponseEntity<RecentPostsResponse> recentPost(){
+        RecentPostsResponse recentPost = postService.recentPost();
         return new ResponseEntity<>(recentPost, HttpStatus.OK);
     }
 

@@ -6,6 +6,7 @@ import com.example.ottokeng.domain.post.presentation.dto.request.PostWritingRequ
 import com.example.ottokeng.domain.post.presentation.dto.request.ModifyPostWritingRequest;
 import com.example.ottokeng.domain.post.presentation.dto.response.AllPostsResponse;
 import com.example.ottokeng.domain.post.presentation.dto.response.RecentPostResponse;
+import com.example.ottokeng.domain.post.presentation.dto.response.RecentPostsResponse;
 import com.example.ottokeng.domain.post.presentation.dto.response.ShowPostResponse;
 import com.example.ottokeng.domain.post.repository.ImageRepository;
 import com.example.ottokeng.domain.post.repository.PostRepository;
@@ -33,14 +34,11 @@ public class PostServiceImpl implements PostService {
     private final CurrentUserUtil userUtil;
 
     private final PostRepository postRepository;
-    private final UserRepository userRepository;
     private final ImageRepository imageRepository;
     private final S3Service s3Service;
 
     @Override
     public AllPostsResponse getAllPost() {
-        User user = userUtil.getCurrentUser();
-
         List<ShowPostResponse> showPostResponses = postRepository.findAll()
                 .stream()
                 .map(ShowPostResponse::new)
@@ -61,7 +59,8 @@ public class PostServiceImpl implements PostService {
                 .title(request.getTitle())
                 .contents(request.getContents())
                 .acquire(request.getAcquire())
-                .address(request.getAddress())
+                .lat(request.getLat())
+                .lng(request.getLng())
                 .type(request.getType())
                 .user(user)
                 .build();
@@ -87,7 +86,8 @@ public class PostServiceImpl implements PostService {
                 request.getTitle(),
                 request.getContents(),
                 request.getAcquire(),
-                request.getAddress(),
+                request.getLat(),
+                request.getLng(),
                 request.getType());
 
         if(multipartFiles != null) {
@@ -126,15 +126,21 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<RecentPostResponse> recentPost() {
-        List<Post> posts = postRepository.findFirst24ByOrderById();
-        return posts.stream()
+    public RecentPostsResponse recentPost() {
+        List<Post> recentposts = postRepository.findFirst24ByOrderById();
+        List<RecentPostResponse> recentPostsResponses = recentposts.stream()
                 .map(post -> new RecentPostResponse(
                         post.getUser().getName(),
                         post.getTitle(),
-                        post.getImages(),
-                        post.getAddress(),
+                        post.getImages().get(0).getImageUrl(),
                         post.getCreatedAt()
                 )).collect(Collectors.toList());
+        List<ShowPostResponse> recentPostPage = postRepository.findFirst24ByOrderById().stream()
+                .map(ShowPostResponse::new)
+                .collect(Collectors.toList());
+        return RecentPostsResponse.builder()
+                .recentPosts(recentPostsResponses)
+                .recentPostPage(recentPostPage)
+                .build();
     }
 }
