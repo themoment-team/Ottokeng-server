@@ -1,9 +1,7 @@
 package com.example.ottokeng.domain.user.controller;
 
-import com.example.ottokeng.domain.comment.dto.CommentResponse;
 import com.example.ottokeng.domain.post.presentation.dto.response.ShowPostResponse;
 import com.example.ottokeng.domain.user.service.UserService;
-import com.example.ottokeng.global.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

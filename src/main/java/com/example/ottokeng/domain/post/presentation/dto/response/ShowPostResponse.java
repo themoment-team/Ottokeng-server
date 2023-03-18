@@ -1,6 +1,5 @@
 package com.example.ottokeng.domain.post.presentation.dto.response;
 
-import com.example.ottokeng.domain.post.entity.Image;
 import com.example.ottokeng.domain.post.entity.Post;
 import com.example.ottokeng.domain.post.entity.Get;
 import com.example.ottokeng.domain.post.entity.Type;
