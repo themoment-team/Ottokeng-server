@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-@CrossOrigin(origins = {"https://server.ottokeng.site/","https://www.ottokeng.site/","https://ottokeng.site/","http://server.ottokeng.site/","http://www.ottokeng.site/","http://ottokeng.site/"})
+@CrossOrigin(origins = {"https://server.ottokeng.site","https://www.ottokeng.site","https://ottokeng.site","http://server.ottokeng.site","http://www.ottokeng.site","http://ottokeng.site","http://localhost:3000"})
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/post")
