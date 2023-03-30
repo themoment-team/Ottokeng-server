@@ -10,6 +10,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -24,7 +29,8 @@ public class SecurityConfig{
 
         http
                 .csrf().disable()
-                .httpBasic().disable();
+                .httpBasic().disable()
+                .cors().configurationSource(corsConfigurationSource());
 
         http.authorizeRequests()
                 .antMatchers("/login/oauth/**").permitAll()
@@ -44,4 +50,17 @@ public class SecurityConfig{
 
     }
 
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        configuration.setAllowedOrigins(Arrays.asList("https://www.ottokeng.site","https://ottokeng.site","http://www.ottokeng.site","http://ottokeng.site","http://localhost:3000","https://localhost:3000"));
+        configuration.addAllowedHeader("*");
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PATCH", "DELETE"));
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 }
