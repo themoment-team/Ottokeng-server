@@ -1,7 +1,7 @@
 package com.example.ottokeng.global.config;
 
-import com.amazonaws.HttpMethod;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -16,8 +16,8 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedMethods(
                         HttpMethod.GET.name(),
                         HttpMethod.POST.name(),
-                        HttpMethod.DELETE.name(),
-                        HttpMethod.PATCH.name()
+                        HttpMethod.PATCH.name(),
+                        HttpMethod.DELETE.name()
                 )
                 .allowCredentials(true)
                 .maxAge(3600);
