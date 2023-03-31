@@ -2,6 +2,7 @@ package com.example.ottokeng.domain.post.service.impl;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
@@ -43,8 +44,11 @@ public class S3Service {
 
     @PostConstruct
     public AmazonS3Client amazonS3Client() {
+        AwsClientBuilder.EndpointConfiguration endpointConfiguration = new AwsClientBuilder.EndpointConfiguration(
+                "vpce-0cc0ab5ecb9abbd79.s3.amazonaws.com", "{cloud.aws.region.static}");
         BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKey, secretKey);
         return (AmazonS3Client) AmazonS3ClientBuilder.standard()
+                .withEndpointConfiguration(endpointConfiguration)
                 .withRegion(region)
                 .withCredentials(new AWSStaticCredentialsProvider(awsCreds))
                 .build();
