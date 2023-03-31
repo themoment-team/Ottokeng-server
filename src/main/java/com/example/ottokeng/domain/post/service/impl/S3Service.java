@@ -45,11 +45,10 @@ public class S3Service {
     @PostConstruct
     public AmazonS3Client amazonS3Client() {
         AwsClientBuilder.EndpointConfiguration endpointConfiguration = new AwsClientBuilder.EndpointConfiguration(
-                "vpce-0cc0ab5ecb9abbd79.s3.amazonaws.com", "{cloud.aws.region.static}");
+                "vpce-0cc0ab5ecb9abbd79.s3.amazonaws.com", region);
         BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKey, secretKey);
         return (AmazonS3Client) AmazonS3ClientBuilder.standard()
                 .withEndpointConfiguration(endpointConfiguration)
-                .withRegion(region)
                 .withCredentials(new AWSStaticCredentialsProvider(awsCreds))
                 .build();
     }
