@@ -42,10 +42,13 @@ public class S3Service {
     @Value("${cloud.aws.region.static}")
     private String region;
 
+    @Value("${cloud.aws.s3.client.endpointOverride}")
+    private String endPoint;
+
     @PostConstruct
     public AmazonS3Client amazonS3Client() {
         AwsClientBuilder.EndpointConfiguration endpointConfiguration = new AwsClientBuilder.EndpointConfiguration(
-                "vpce-0cc0ab5ecb9abbd79.s3.amazonaws.com", region);
+                endPoint, region);
         BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKey, secretKey);
         return (AmazonS3Client) AmazonS3ClientBuilder.standard()
                 .withEndpointConfiguration(endpointConfiguration)
